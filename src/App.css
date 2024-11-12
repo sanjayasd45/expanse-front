@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: blanchedalmond;
+}
+.hide{
+    display: none;
+}
+.visible{
+    display: flex;
+}
+button{
+    all: unset;
+    border-radius: 8px;
+    padding: 0.5rem;
+    background-color: rgba(30, 30, 255, 0.589);
+    width: fit-content;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+.green svg{
+    color: green;
+}
+.red svg{
+    color: red;
+}

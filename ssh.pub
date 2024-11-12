@@ -1,0 +1,78 @@
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNkT93X0+3aeiEA9yn38LfLOKiHJ2pWcux43g36D/0L sanjayasd45@gmail.com
+
+[
+  {
+    $match: {
+      email : "sanjayasd4545@gmail.com"
+    },
+  },
+  {
+    $group: {
+      _id: "$spendingTag",
+      Amount : {
+        $sum : "$amount"
+      }
+    }
+  }
+]
+
+// for a week, month, year, All
+[
+  {
+    $match: {
+      email: "sanjayasd45@gmail.com",
+      createdAt : {
+         $gte: new Date(new Date().setDate(new Date().getDate() - 7))
+      }
+    },
+  },
+  {
+    $group: {
+      _id: "$spendingTag",
+      Amount: {
+        $sum: "$amount",
+      },
+    },
+  },
+]
+
+// for today
+[
+  {
+    $match: {
+      email: "sanjayasd4545@gmail.com",
+      createdAt : {
+         $gte: new Date(new Date().setHours(0, 0, 0, 0)),  // Start of today
+        $lt: new Date(new Date().setHours(24, 0, 0, 0))   // Start of tomorrow
+      }
+    },
+  },
+  {
+    $group: {
+      _id: "$spendingTag",
+      Amount: {
+        $sum: "$amount",
+      },
+    },
+  },
+]
+
+// start date to to date
+
+[
+  {
+    $match: {
+      email: "sanjayasd45@gmail.com",  // Filter by email
+      createdAt: {
+        $gte: new Date("2024-11-01"),  // Start date (inclusive)
+        $lt: new Date("2024-11-10")    // End date (exclusive)
+      }
+    }
+  },
+  {
+    $group: {
+      _id: "$spendingTag",            // Group by spendingTag
+      totalAmount: { $sum: "$amount" }  // Sum the amount for each spendingTag
+    }
+  }
+]
