@@ -63,7 +63,6 @@ export default function AddAmount({ setIsOpenAmt }) {
             <option>Creditor</option>
             <option>Client</option>
             <option>Investment</option>
-            <option>Other</option>
           </select>
         </div>
         {opt === "Creditor" || opt === "Client" ? (

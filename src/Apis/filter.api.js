@@ -19,10 +19,14 @@ export const alltimeData = async({email}) => {
         const data = await responce.data
         data?.map((e) => {
             totalSum = totalSum + e.sum
-            if(e.deduction){
+            if(e._id === "Sallary"){
                 balance = balance - e.sum
+                console.log("from true");
+                
             }else{
+                console.log(e);
                 balance = balance + e.sum
+                console.log("from false");
             }
         })
         console.log(data.data);

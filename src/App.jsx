@@ -6,7 +6,7 @@ import axios from 'axios'
 import { setUser } from './Store/slices/user.slice'
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/dashboard/dashboard'
+import Dashboard from './pages/dashboard/Dashboard'
 const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
 function App() {
