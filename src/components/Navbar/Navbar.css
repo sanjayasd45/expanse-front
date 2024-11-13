@@ -6,6 +6,7 @@
     justify-content: space-around;
     align-items: center;
     border-bottom: 1px solid gray;
+    flex-direction: row;
 }
 .navbar a{
     text-decoration: none;
@@ -19,4 +20,8 @@
     width: 2rem;
     border-radius: 50%;
     cursor: pointer;
+}
+.navbar-opts{
+    /* display: block; */
+    /* position: fixed; */
 }

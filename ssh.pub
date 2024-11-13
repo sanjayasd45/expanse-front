@@ -28,7 +28,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNkT93X0+3aeiEA9yn38LfLOKiHJ2pWcux43g36D/0L
   },
   {
     $group: {
-      _id: "$spendingTag",
+      _id: "$Tag",
       Amount: {
         $sum: "$amount",
       },
@@ -49,10 +49,13 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNkT93X0+3aeiEA9yn38LfLOKiHJ2pWcux43g36D/0L
   },
   {
     $group: {
-      _id: "$spendingTag",
+      _id: "$Tag",
       Amount: {
         $sum: "$amount",
       },
+      deduction : {
+        $frist : "$deduction"
+      }
     },
   },
 ]
