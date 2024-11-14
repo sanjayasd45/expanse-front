@@ -5,6 +5,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { AiOutlineLogout } from "react-icons/ai";
 import { RiLoginCircleLine } from "react-icons/ri";
 const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
+const clientId = import.meta.env.VITE_SERVER_CLIENTID;
+const redirectUri = import.meta.env.VITE_SERVER_REDIRECTURI;
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -24,9 +26,6 @@ export default function Navbar() {
   
 
   function handleAuth() {
-    // window.open(`https://expense-back-nqgs.onrender.com/auth/google/callback`, "_self");
-    const clientId = "801219837774-pgbec0gat2qes4cp4qfp45ea71v2n3db.apps.googleusercontent.com"
-    const redirectUri = "https://expense-back-nqgs.onrender.com/auth/google/callback";
     const scope = "profile email";
     const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
   
