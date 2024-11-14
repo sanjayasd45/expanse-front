@@ -24,7 +24,13 @@ export default function Navbar() {
   
 
   function handleAuth() {
-    window.open(`https://expense-back-nqgs.onrender.com/auth/google/callback`, "_self");
+    // window.open(`https://expense-back-nqgs.onrender.com/auth/google/callback`, "_self");
+    const clientId = "801219837774-pgbec0gat2qes4cp4qfp45ea71v2n3db.apps.googleusercontent.com"
+    const redirectUri = "https://expense-back-nqgs.onrender.com/auth/google/callback";
+    const scope = "profile email";
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+  
+    window.open(authUrl, "_self");
   }
   function logOut() {
     window.open(`${baseUrl}/auth/logout`, "_self"); 
