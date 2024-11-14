@@ -24,7 +24,7 @@ export default function Navbar() {
   
 
   function handleAuth() {
-    window.open(`${"https://expense-back-nqgs.onrender.com"}/auth/google/callback`, "_self");
+    window.open(`https://expense-back-nqgs.onrender.com/auth/google/callback`, "_self");
   }
   function logOut() {
     window.open(`${baseUrl}/auth/logout`, "_self"); 
