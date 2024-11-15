@@ -26,7 +26,7 @@ function App() {
       
       console.log("from frotend", data.user._json);
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
     }
   };
 
