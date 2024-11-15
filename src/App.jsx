@@ -17,14 +17,16 @@ function App() {
     try {
       const url = `${baseUrl}/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
+      console.log(data.user);
+      
       const userData = {
-        name : data.user._json.name,
-        email : data.user._json.email,
-        picture : data.user._json.picture
+        name : data.user.name,
+        email : data.user.email,
+        picture : data.user.picture
       }
       dispatch(setUser(userData))
       
-      console.log("from frotend", data.user._json);
+      console.log("from frotend", data.user);
     } catch (e) {
       console.log(e.message);
     }
