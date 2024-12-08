@@ -7,6 +7,7 @@ import { setUser } from './Store/slices/user.slice'
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/dashboard/Dashboard'
+import Auth from './pages/Auth/Auth'
 const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </Router>
     </>

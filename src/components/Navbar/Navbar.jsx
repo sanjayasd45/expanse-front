@@ -13,6 +13,7 @@ export default function Navbar() {
   const path = useLocation()
   const user = useSelector(state => state.user);
   console.log(user);
+
   const handleClick = () => {
     console.log("path", path.pathname);
     
@@ -26,19 +27,16 @@ export default function Navbar() {
   
 
   function handleAuth() {
-    const scope = "profile email";
-    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
-  
-    window.open(authUrl, "_self");
+
   }
   function logOut() {
-    window.open(`${baseUrl}/auth/logout`, "_self"); 
+
   }
   return (
     <div className="navbar">
       <div>
         {user.picture ? <img src={user.picture}alt="profile pic" onClick={handleClick}></img> :  <FaRegCircleUser />}
-        <NavLink>
+        <NavLink to={"/auth"}>
           {user.name != "" || undefined ? (
             <p onClick={logOut}><AiOutlineLogout /></p>
           ) : (
@@ -46,6 +44,7 @@ export default function Navbar() {
               <RiLoginCircleLine />
             </p>
           )}
+          {/* <h3>Login</h3> */}
         </NavLink>
       </div>
     </div>
