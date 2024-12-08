@@ -63,8 +63,7 @@ export default function Auth() {
                 });
         }catch{(err) => {
             console.log(err.response.data.message);
-        }
-        }
+        }}
     };
 
     //   navigate("/app/welcome")

@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <div className="navbar">
       <div>
-        {user.picture ? <img src={user.picture}alt="profile pic" onClick={handleClick}></img> :  <FaRegCircleUser />}
+        <NavLink to={"/dashboard"}>{user.picture ? <img src={user.picture}alt="profile pic" onClick={handleClick}></img> :  <FaRegCircleUser />}</NavLink>        
         <NavLink to={"/auth"}>
           {user.name != "" || undefined ? (
             <p onClick={logOut}><AiOutlineLogout /></p>
