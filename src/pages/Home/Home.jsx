@@ -19,7 +19,6 @@ export default function Home() {
   const [isOpenAmt, setIsOpenAmt] = useState(false);
   const [isSpending, setIsSpending] = useState(false);
   const topData = useTodaysTS();
-  console.log(topData);
 
   const handleClick = (e) => {
     console.log(e.target);
@@ -48,7 +47,7 @@ export default function Home() {
         <div className="home_recents">
           <div className="home_recents-total">
             <h3>
-              {`Today's`} total spendings ₹{topData.totalAmount}
+                  Total spendings ₹{topData.totalAmount}
             </h3>
             {
               topData?.topCategory?.amount && topData?.topCategory?.amount > 0 ? (
@@ -65,7 +64,7 @@ export default function Home() {
             }
           </div>
           <div className="home_recents-items">
-            <h3>{`Today's Spendings`}</h3>
+            <h3>{`Spendings`}</h3>
             <div className="home_recents-items1">
               {recentDataList?.map((item) => (
                 <Recent key={item._id} item={item} />
