@@ -9,9 +9,10 @@ import AddSpendings from "../../models/add spendings/AddSpendings";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecentData } from "../../Store/slices/getRecentData.slice";
 import { useTodaysTS } from "../../helper/helper.cac";
-const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate()
   const email = useSelector((state) => state.user).email;
   const [plusAnim, setPlusAnim] = useState(false);
   const [visibility, setVisibility] = useState("visible");
@@ -37,7 +38,7 @@ export default function Home() {
   console.log(recentDataList);
 
   function handleAuth() {
-    window.open(`${baseUrl}/auth/google/callback`, "_self");
+    navigate("/auth")
   }
 
   return (
