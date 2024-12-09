@@ -48,7 +48,10 @@ export default function Dashboard() {
     <div className="dashboard">
       <Navbar />
       <div className="dashboard-c">
-        <button>Filter</button>
+        <div className="dashboard_btns">
+          <button>Filter</button>
+          {/* <button>Add remote users</button> */}
+        </div>
         <div className="dashboard-c-s">
           <div className="dashboard-c-s-f">
             <select onChange={handleSelect}>

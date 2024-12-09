@@ -64,3 +64,11 @@
     all: unset;
     background-color: rgb(0, 0, 56);
 }
+.dashboard_btns {
+    display: flex;
+    gap: 0.5rem;
+}
+.dashboard_btns button{
+    width: max-content;
+    width: 100%;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import "./AddAmount.css";
 import PropTypes from 'prop-types';
 import { ImCross } from "react-icons/im";
@@ -15,7 +15,7 @@ export default function AddAmount({ setIsOpenAmt }) {
   const [amt, setAmt] = useState("") 
   const [opt, setOpt] = useState("Sallary");
   const [name, setName] = useState("")
-  const [note, setNote] = useState("General expense")
+  const [note, setNote] = useState("")
   const handleClick = () => {
     setIsOpenAmt(false);
     dispatch(getRecentData({ email }));
