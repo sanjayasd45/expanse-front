@@ -58,6 +58,7 @@ export default function AddSpendings({setIsSpending}) {
                 <option>Beauty</option>
                 <option>Fare</option>
                 <option>Grocery</option>
+                <option>Medical</option>
                 <option>Other</option>
               </select>
             </div>
