@@ -4,9 +4,7 @@ import { useSelector } from "react-redux";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { AiOutlineLogout } from "react-icons/ai";
 import { RiLoginCircleLine } from "react-icons/ri";
-const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
-const clientId = import.meta.env.VITE_SERVER_CLIENTID;
-const redirectUri = import.meta.env.VITE_SERVER_REDIRECTURI;
+
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -44,7 +42,6 @@ export default function Navbar() {
               <RiLoginCircleLine />
             </p>
           )}
-          {/* <h3>Login</h3> */}
         </NavLink>
       </div>
     </div>

@@ -31,39 +31,43 @@ export default function Auth() {
 
     const handleSubmit = (formType) => async(e) => {
         e.preventDefault();        
-        setForms((prevForms) => ({
-            ...prevForms,
-            [formType]: initialFormState[formType],
-        }));
-        try{
-            const config = {
-              headers : {
-                "content-type" : "application/json"
-              }
-            }
-            axios.post(`${baseUrl}/auth/${formType}`, forms[formType], config)
-                .then(response => {
-                    console.log(response.data); 
-                    const data  = response.data
-                    localStorage.setItem("userData" , JSON.stringify(response))
-                    dispatch(setUser({name : data.name, username : data.username, email : data.email}))
-                    navigate("/")
-                })
-                .catch(error => {
-                    console.error(error.response.data.message || "Something went wrong");
-                    setError(error.response.data.message)
-                    if(formType === "signup"){
-                        let data = error.response.data.formData
-                        let formData ={...data, password : ""}
-                        setForms((prevForms) => ({
-                            ...prevForms,
-                            [formType]: formData,
-                        }));
-                    }
-                });
-        }catch{(err) => {
-            console.log(err.response.data.message);
-        }}
+        if(forms[formType].password.length < 4){
+            setError("Password should  contain more than 3 characters")
+        }else{
+            setForms((prevForms) => ({
+                ...prevForms,
+                [formType]: initialFormState[formType],
+            }));
+            try{
+                const config = {
+                  headers : {
+                    "content-type" : "application/json"
+                  }
+                }
+                axios.post(`${baseUrl}/auth/${formType}`, forms[formType], config)
+                    .then(response => {
+                        console.log(response.data); 
+                        const data  = response.data
+                        localStorage.setItem("userData" , JSON.stringify(response))
+                        dispatch(setUser({name : data.name, username : data.username, email : data.email}))
+                        navigate("/")
+                    })
+                    .catch(error => {
+                        console.error(error.response.data.message || "Something went wrong");
+                        setError(error.response.data.message)
+                        if(formType === "signup"){
+                            let data = error.response.data.formData
+                            let formData ={...data, password : ""}
+                            setForms((prevForms) => ({
+                                ...prevForms,
+                                [formType]: formData,
+                            }));
+                        }
+                    });
+            }catch{(err) => {
+                console.log(err.response.data.message);
+            }}
+        }
     };
 
     //   navigate("/app/welcome")
