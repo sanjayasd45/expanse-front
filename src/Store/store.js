@@ -7,9 +7,15 @@ const rootReducer = combineReducers({
     getRecentData : recentDataReducer
 
   });
+  const rootReducers = (state, action) => {
+    if (action.type === 'RESET_STORE') {
+        state = undefined; // Reset the entire state
+    }
+    return rootReducer(state, action);
+};
   
   export const store = configureStore({
-    reducer: rootReducer,
+    reducer: rootReducers,
     // middleware: [socketMiddleware]
   });
-
+  export const resetStore = () => ({ type: 'RESET_STORE' });

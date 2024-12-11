@@ -12,12 +12,13 @@ const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
 function App() {
   const dispatch = useDispatch()
+  const token = localStorage.getItem('authToken');
   // const user = useSelector(state => state.user)
 
   const getUser = async () => {
     try {
-      const url = `${baseUrl}/auth/login`;
-      const { data } = await axios.get(url, { withCredentials: true });
+      const url = `${baseUrl}/user/getUser`;
+      const { data } = await axios.get(url, { withCredentials: true, headers: {'Authorization': `Bearer ${token}`} });
       const value = JSON.parse(localStorage.getItem('userData'));
       console.log(data.user);
       dispatch(setUser(value))

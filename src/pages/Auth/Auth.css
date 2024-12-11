@@ -53,7 +53,9 @@
     color: red;
     margin-bottom: 0.5rem;
 }
-
+.auth button{
+    cursor: pointer;
+}
 
 
 
