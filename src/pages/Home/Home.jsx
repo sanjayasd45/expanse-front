@@ -47,7 +47,7 @@ export default function Home() {
         <div className="home_recents">
           <div className="home_recents-total">
             <h3>
-                  Total spendings ₹{topData.totalAmount}
+                  Total Transactions ₹{topData.totalAmount}
             </h3>
             {
               topData?.topCategory?.amount && topData?.topCategory?.amount > 0 ? (
@@ -64,7 +64,7 @@ export default function Home() {
             }
           </div>
           <div className="home_recents-items">
-            <h3>{`Spendings`}</h3>
+            <h3>{`Transactions`}</h3>
             <div className="home_recents-items1">
               {recentDataList?.map((item) => (
                 <Recent key={item._id} item={item} />

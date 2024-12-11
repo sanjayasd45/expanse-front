@@ -1,11 +1,14 @@
 import "./Dashboard.css";
 import Navbar from "../../components/Navbar/Navbar";
-import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { alltimeData, fromRange, today } from "../../Apis/filter.api";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { spendingList } from "../../helper/helper.cac";
 
 export default function Dashboard() {
+  const value = JSON.parse(localStorage.getItem('userData'));
+  console.log("value", value);
+  
   const user = useSelector((state) => state.user);
   const email = user.email;
   const [data, setData] = useState(null);
@@ -33,11 +36,11 @@ export default function Dashboard() {
       const data = await fromRange({ email, duration: 7 });
       setData(data);
       console.log(data);
-    }else if(e.target.value === "Last Month"){
+    } else if (e.target.value === "Last Month") {
       const data = await fromRange({ email, duration: 30 });
       setData(data);
       console.log(data);
-    }else if(e.target.value === "Last Year"){
+    } else if (e.target.value === "Last Year") {
       const data = await fromRange({ email, duration: 365 });
       setData(data);
       console.log(data);
@@ -65,15 +68,13 @@ export default function Dashboard() {
           <div>
             Total Money Received{" "}
             <span>
-              ₹{data?.totalSum} <IoCheckmarkDoneCircleOutline />
+              ₹{data?.totalSum} 
             </span>
           </div>
           {data?.data?.map((element) => (
             <div key={element._id}>
               {element._id}{" "}
-              <span>
-                ₹{element.sum} <IoCheckmarkDoneCircleOutline />
-              </span>
+              {spendingList.includes(element?._id) ? <span style={{ color: "#ff1a00" }}>₹{element.sum} </span> : <span style={{ color: "rgb(72 255 0)" }}> ₹{element.sum}</span>}
             </div>
           ))}
           {data?.balance ? (

@@ -20,3 +20,21 @@ export const useTodaysTS = () => {
 
     return data;
 };    
+
+
+export const spendingList = [
+    "Education",
+    "Room Rent",
+    "Credit Card Bill",
+    "Vegetables",
+    "Petrol",
+    "Wearables",
+    "Beauty",
+    "Fare",
+    "Grocery",
+    "Medical",
+    "Repairing",
+    "Udhari Lena",
+    "Udhari Dena",
+    "Other"
+];

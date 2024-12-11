@@ -6,6 +6,7 @@ import '../add amount/AddAmount.css'
 import { AddSpending } from '../../Apis/spending';
 import { useDispatch, useSelector } from "react-redux";
 import { getRecentData } from '../../Store/slices/getRecentData.slice';
+import { spendingList } from '../../helper/helper.cac';
 
 export default function AddSpendings({setIsSpending}) {
   const dispatch = useDispatch()
@@ -38,6 +39,7 @@ export default function AddSpendings({setIsSpending}) {
       setIsSpending(false)
       dispatch(getRecentData({ email }));
     }
+    
 
     return (
         <div className="add_amount">
@@ -49,20 +51,14 @@ export default function AddSpendings({setIsSpending}) {
             <div>
               <label htmlFor="tag">Select Tag</label>
               <select className="add_amount-opt" name='Tag' onChange={(e) => setTag(e.target.value)}>
-                <option>Education</option>
-                <option>Room Rent</option>
-                <option>Credit Card Bill</option>
-                <option>Vegetables</option>
-                <option>Petrol</option>
-                <option>Wearables</option>
-                <option>Beauty</option>
-                <option>Fare</option>
-                <option>Grocery</option>
-                <option>Medical</option>
-                <option>Other</option>
+                {
+                  spendingList?.map((ele) => (
+                    <option key={ele}>{ele}</option>
+                  ))
+                }
               </select>
             </div>
-            {Tag === "Creditor" || Tag === "Client" ? (
+            {Tag === "Udhari Lena" || Tag === "Udhari Dena" ? (
               <div>
                 <label htmlFor="name">Enter Name</label>
                 <input name="name" placeholder="Name" value={data.name} onChange={handleChange}></input>

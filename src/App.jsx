@@ -16,16 +16,11 @@ function App() {
 
   const getUser = async () => {
     try {
-      const url = `${baseUrl}/auth/login/success`;
+      const url = `${baseUrl}/auth/login`;
       const { data } = await axios.get(url, { withCredentials: true });
+      const value = JSON.parse(localStorage.getItem('userData'));
       console.log(data.user);
-      
-      const userData = {
-        name : data.user.name,
-        email : data.user.email,
-        picture : data.user.picture
-      }
-      dispatch(setUser(userData))
+      dispatch(setUser(value))
       
       console.log("from frotend", data.user);
     } catch (e) {

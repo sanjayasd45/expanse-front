@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import "./AddAmount.css";
 import PropTypes from 'prop-types';
 import { ImCross } from "react-icons/im";
@@ -12,7 +12,7 @@ export default function AddAmount({ setIsOpenAmt }) {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
   const email = user?.email
-  const [amt, setAmt] = useState("") 
+  const [amt, setAmt] = useState("")
   const [opt, setOpt] = useState("Sallary");
   const [name, setName] = useState("")
   const [note, setNote] = useState("")
@@ -25,21 +25,21 @@ export default function AddAmount({ setIsOpenAmt }) {
     setOpt(e.target.value);
   };
   const handleChange = (e) => {
-    if(!isNaN(e.target.value) && e.target.value !== ' '){
-        console.log(e.target.value/1);
-        setAmt(e.target.value)
-    }else if(e.target.value/1 === 0){
-        setAmt("")
+    if (!isNaN(e.target.value) && e.target.value !== ' ') {
+      console.log(e.target.value / 1);
+      setAmt(e.target.value)
+    } else if (e.target.value / 1 === 0) {
+      setAmt("")
     }
   }
 
   const formData = {
-    email : user.email,
-    amount : amt,
-    Tag : opt,
-    name : name,
-    note : note,
-    deduction : false
+    email: user.email,
+    amount: amt,
+    Tag: opt,
+    name: name,
+    note: note,
+    deduction: false
   }
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -47,7 +47,7 @@ export default function AddAmount({ setIsOpenAmt }) {
     setAmt("")
     setOpt("")
     setName("")
-    setNote("")   
+    setNote("")
   }
   return (
     <div className="add_amount">
@@ -60,12 +60,13 @@ export default function AddAmount({ setIsOpenAmt }) {
           <label htmlFor="tag">Select Tag</label>
           <select className="add_amount-opt" onChange={handleSelect}>
             <option>Sallary</option>
+            <option>Udhari vapas milna</option>
             <option>Creditor</option>
             <option>Client</option>
             <option>Investment</option>
           </select>
         </div>
-        {opt === "Creditor" || opt === "Client" ? (
+        {opt === "Creditor" || opt === "Client" || opt === "Udhari vapas milna" ? (
           <div>
             <label htmlFor="name">Enter Name</label>
             <input name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}></input>

@@ -28,7 +28,7 @@ export default function Navbar() {
 
   }
   function logOut() {
-
+    localStorage.removeItem('userData');
   }
   return (
     <div className="navbar">

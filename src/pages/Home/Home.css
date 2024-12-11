@@ -15,8 +15,10 @@
   padding: 0.5rem;
 }
 .home_recents-total h3 {
+  
 }
 .home_recents-total {
+
 }
 .home_recents-items {
   width: calc(100% - 4%);
@@ -37,6 +39,9 @@
   position: fixed;
   bottom: 0rem;
   right: 0rem;
+}
+.home_addBtn div p {
+  cursor: pointer;
 }
 .home_addBtn-icon {
   display: flex;

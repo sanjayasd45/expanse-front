@@ -47,8 +47,14 @@ export default function Auth() {
                 axios.post(`${baseUrl}/auth/${formType}`, forms[formType], config)
                     .then(response => {
                         console.log(response.data); 
-                        const data  = response.data
-                        localStorage.setItem("userData" , JSON.stringify(response))
+                        const data = response.data
+                        const userData  = {
+                            name : response?.data.name,
+                            username : response?.data.username,
+                            email : response?.data.email,
+                            token : response?.data.token
+                        }
+                        localStorage.setItem("userData" , JSON.stringify(userData))
                         dispatch(setUser({name : data.name, username : data.username, email : data.email}))
                         navigate("/")
                     })
