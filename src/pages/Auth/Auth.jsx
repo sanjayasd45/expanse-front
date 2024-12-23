@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from 'react-redux';  
+import { useDispatch, useSelector } from 'react-redux';  
 import axios from 'axios'
 import './Auth.css'
 import { setUser } from "../../Store/slices/user.slice";
@@ -10,6 +10,9 @@ const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
 export default function Auth() {
     const  dispatch = useDispatch()
+    const userData = useSelector(state => state.user) 
+    console.log(userData);
+    
     const navigate = useNavigate() 
     const [loginS, setLogin] = useState("auth_active")
     const [signupS, setSignup] = useState("")
@@ -28,53 +31,68 @@ export default function Auth() {
             [formType]: { ...prevForms[formType], [name]: value },
         }));
     };
-
-    const handleSubmit = (formType) => async(e) => {
-        e.preventDefault();        
-        if(forms[formType].password.length < 4){
-            setError("Password should  contain more than 3 characters")
-        }else{
+    
+    const handleSubmit = (formType) => async (e) => {
+        e.preventDefault();
+        dispatch(setUser({ name: "", username: "", email: "", loading: true }));
+    
+        if (forms[formType].password.length < 4) {
+            setError("Password should contain more than 3 characters");
+            dispatch(setUser({ name: "", username: "", email: "", loading: false })); // Stop loading on error
+            return;
+        }
+    
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+    
+            const response = await axios.post(
+                `${baseUrl}/auth/${formType}`,
+                forms[formType],
+                config
+            );
+    
+            const data = response.data;
+            const userData = {
+                name: data.name,
+                username: data.username,
+                email: data.email,
+                token: data.token,
+            };
+    
+            localStorage.setItem("authToken", data.token);
+            localStorage.setItem("userData", JSON.stringify(userData));
+    
+            dispatch(setUser({ ...userData, loading: false }));
             setForms((prevForms) => ({
                 ...prevForms,
                 [formType]: initialFormState[formType],
             }));
-            try{
-                const config = {
-                  headers : {
-                    "content-type" : "application/json"
-                  }
-                }
-                axios.post(`${baseUrl}/auth/${formType}`, forms[formType], config)
-                    .then(response => {
-                        const data = response.data
-                        const userData  = {
-                            name : response?.data.name,
-                            username : response?.data.username,
-                            email : response?.data.email,
-                            token : response?.data.token
-                        }
-                        localStorage.setItem('authToken', response?.data.token);
-                        localStorage.setItem("userData" , JSON.stringify(userData))
-                        dispatch(setUser({name : data.name, username : data.username, email : data.email}))
-                        navigate("/")
-                    })
-                    .catch(error => {
-                        console.error(error.response.data.message || "Something went wrong");
-                        setError(error.response.data.message)
-                        if(formType === "signup"){
-                            let data = error.response.data.formData
-                            let formData ={...data, password : ""}
-                            setForms((prevForms) => ({
-                                ...prevForms,
-                                [formType]: formData,
-                            }));
-                        }
-                    });
-            }catch{(err) => {
-                console.log(err.response.data.message);
-            }}
+            navigate("/");
+        } catch (error) {
+            const errorMessage =
+                error.response?.data?.message || "Something went wrong";
+            setError(errorMessage);
+    
+            if (formType === "signup" && error.response?.data?.formData) {
+                const formData = {
+                    ...error.response.data.formData,
+                    password: "",
+                };
+                setForms((prevForms) => ({
+                    ...prevForms,
+                    [formType]: formData,
+                }));
+            }
+    
+            dispatch(setUser({ name: "", username: "", email: "", loading: false }));
+            console.error("Error:", errorMessage);
         }
     };
+    
 
     //   navigate("/app/welcome")
     const login = () => {
@@ -145,7 +163,12 @@ export default function Auth() {
                         onChange={handleChange("login")}
                         placeholder="Password"
                     />
-                    <button type="submit">Log In</button>
+                    <button type="submit">
+                        {
+                            userData?.loading ? (<div className="loader"></div>) : ("Log In")
+                        }   
+                    </button>
+                    
                 </form>
             </div>
         </div>

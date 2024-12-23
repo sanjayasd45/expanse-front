@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(18, 1, 66);
+  background-color: #121212;
 }
 .home_recents-total {
   width: calc(100% - 3%);
@@ -101,7 +101,7 @@
   background-color: #00065791;
 }
 .home_user0 {
-  background-color: rgb(18, 1, 66);
+  background-color: #121212;
   width: 100%;
   height: calc(100vh - 3rem);
   border-top: 2px solid blue;

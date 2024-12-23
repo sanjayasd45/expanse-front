@@ -1,18 +1,41 @@
 .recents{
     border: 2px solid rgb(65, 3, 235);
+    background-color: rgb(33 1 119 / 29%)
+}
+.recnts-data{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
     padding: 0.2rem;
     border-radius: 0.3rem;
-    background-color: rgb(33, 1, 119)
+
 }
-.recents-tags{
+.recents-tags div{
     display: inline-flex;
     gap: 1rem;
     margin: 0.3rem;
 }
-.recents-tags p {
-    border: 2px solid rgb(65, 3, 235);
+.recents-tags div p {
+    /* border: 2px solid rgb(65, 3, 235); */
     padding: 0.1rem;
     font-size: 0.8rem;
     border-radius: 0.2rem;
-    background-color: rgb(18, 0, 97);
+    background-color: rgb(9 0 47 / 38%);
+}
+.recents-delete span{
+
+}
+.recents-delete span svg{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.recents-delete span svg path:hover{
+    color: red;
+}
+.recents-delete span svg path:active{
+    color: #ff5b52;
+}
+.recents-delete span svg path {
+    color: #ff5b52;
 }

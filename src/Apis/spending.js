@@ -19,3 +19,7 @@ export const AddSpending = async(formData) => {
         console.log(err);
     }
 }
+
+// export const DeleteSpending = async() => {
+//     const axios
+// }

@@ -4,6 +4,7 @@ const initialState = {
     name: "",
     username : "",
     email: "",
+    loading : false,
 }
 
 export const userSlice = createSlice({
