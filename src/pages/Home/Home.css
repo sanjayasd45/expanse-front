@@ -1,13 +1,13 @@
 .home_recents {
   width: 100%;
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 3.04rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #121212;
 }
 .home_recents-total {
-  width: calc(100% - 3%);
+  width: calc(100% - 7%);
   height: 5rem;
   border: 2px solid blue;
   margin-top: 0.6rem;

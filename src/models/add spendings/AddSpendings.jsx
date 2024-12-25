@@ -36,7 +36,7 @@ export default function AddSpendings({setIsSpending}) {
       })
       setTag("")
       dispatch(addItem(dataToAdd))
-      setIsSpending(false)
+      // setIsSpending(false)
     }
     
     return (
@@ -68,7 +68,7 @@ export default function AddSpendings({setIsSpending}) {
             </div>
             <div className='spending-btns'>
               <button type='button' onClick={() => setIsSpending(false)}>Cancel</button>
-              <button type="submit">Add Spending</button>
+              <button type="submit" onClick={() => setIsSpending(false)}>Add Spending</button>
             </div>
           </form>
         </div>
