@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRecentData } from "../../Store/slices/getRecentData.slice";
 import { useTodaysTS } from "../../helper/helper.cac";
 import { useNavigate } from "react-router-dom";
+import DeleteTxn from "../../models/delete/DeleteTxn";
 
 export default function Home() {
   const navigate = useNavigate()
@@ -18,6 +19,9 @@ export default function Home() {
   const [visibility, setVisibility] = useState("visible");
   const [isOpenAmt, setIsOpenAmt] = useState(false);
   const [isSpending, setIsSpending] = useState(false);
+  const [txnToDelete, setTxnToDelete] = useState(null)
+  const [delMdl, setDelMdl] = useState(false)
+
   const topData = useTodaysTS();
 
   const handleClick = (e) => {
@@ -39,9 +43,18 @@ export default function Home() {
   function handleAuth() {
     navigate("/auth")
   }
+  const txnToDeleted = (item) => {
+    console.log(item);
+    setDelMdl(true)   
+    console.log(delMdl);
+     
+    setTxnToDelete(item)
+  }
 
   return (
     <div className="home">
+
+      
       <Navbar />
       {email !== "" ? (
         <div className="home_recents">
@@ -67,7 +80,7 @@ export default function Home() {
             <h3>{`Transactions`}</h3>
             <div className="home_recents-items1">
               {recentDataList?.map((item) => (
-                <Recent key={item._id} item={item} />
+                <Recent key={item._id} item={item} txnToDeleted={txnToDeleted} />
               ))}
             </div>
           </div>
@@ -90,14 +103,16 @@ export default function Home() {
               <p onClick={() => setIsSpending(true)}>Add Spendings</p>
             </div>
           </div>
-          <div className={`home_model1 ${isOpenAmt ? "visible" : "hide"}`}>
+          <div className={` ${isOpenAmt ? "model visible-block" : "model"}`}>
             <AddAmount isOpenAmt={isOpenAmt} setIsOpenAmt={setIsOpenAmt} />
+            <div className="overlay" onClick={() => setIsOpenAmt(false)}></div>
           </div>
-          <div className={`home_model2 ${isSpending ? "visible" : "hide"}`}>
+          <div className={`${isSpending ? "model visible-block" : "model"}`}>
             <AddSpendings
               isOpenAmt={isSpending}
               setIsSpending={setIsSpending}
             />
+            <div className="overlay" onClick={() => setIsSpending(false)}></div>
           </div>
         </div>
       ) : (
@@ -107,6 +122,10 @@ export default function Home() {
           </h2>
         </div>
       )}
+      <div className={delMdl ?  "model visible-block" : "model"}>
+        <DeleteTxn txnToDelete={txnToDelete} setDelMdl={setDelMdl} delMdl={delMdl}/>
+        <div className="overlay" onClick={() => setDelMdl(false)}></div>
+      </div>
     </div>
   );
 }

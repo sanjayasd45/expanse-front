@@ -1,21 +1,20 @@
-import { ImCross } from 'react-icons/im';
 import './AddSpendings.css'
 import { useState } from 'react';
 import PropTypes from 'prop-types'
 import '../add amount/AddAmount.css'
 import { AddSpending } from '../../Apis/spending';
 import { useDispatch, useSelector } from "react-redux";
-import { getRecentData } from '../../Store/slices/getRecentData.slice';
+import { addItem, getRecentData } from '../../Store/slices/getRecentData.slice';
 import { spendingList } from '../../helper/helper.cac';
 
 export default function AddSpendings({setIsSpending}) {
   const dispatch = useDispatch()
   const email = useSelector(state => state.user).email
-  const [Tag , setTag] = useState("Sallary")
+  const [Tag , setTag] = useState("")
     const [data, setData] = useState({
       amount : "",
       name : "",
-      note : ""
+      note : "" 
     })
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -24,23 +23,22 @@ export default function AddSpendings({setIsSpending}) {
             [name]: name === "amount" ? (isNaN(Number(value)) ? previous[name] : Number(value)) : value
         }))
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault()
 
-      AddSpending({...data, email, Tag, deduction : true})
+      const dataToAdd = await AddSpending({...data, email, Tag, deduction : true})
+      console.log({...data, email, Tag, deduction : true});
+      
       setData({
         amount : "",
         name : "",
         note : ""
       })
-      setTag("Sallary")
-    }
-    const handleCross = () => {
+      setTag("")
+      dispatch(addItem(dataToAdd))
       setIsSpending(false)
-      dispatch(getRecentData({ email }));
     }
     
-
     return (
         <div className="add_amount">
           <form action="" className="add_amount-form" onSubmit={handleSubmit}>
@@ -68,11 +66,11 @@ export default function AddSpendings({setIsSpending}) {
               <label htmlFor="note">Enter Note</label>
               <input name="note" placeholder="Note" value={data.note} onChange={handleChange}></input>
             </div>
-            <button type="submit">Add Spending</button>
+            <div className='spending-btns'>
+              <button type='button' onClick={() => setIsSpending(false)}>Cancel</button>
+              <button type="submit">Add Spending</button>
+            </div>
           </form>
-          <div className="add_amount-crossIcon" onClick={handleCross}>
-            <ImCross />
-          </div>
         </div>
       );
 }

@@ -1,0 +1,15 @@
+.spending-btns{
+    display: flex;
+    justify-content: space-between;
+}
+.add_amount-form div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.add_amount-form div input{
+    width: 55%;
+}
+.add_amount-form div select{
+    width: 55%;
+}

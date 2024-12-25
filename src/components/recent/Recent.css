@@ -17,15 +17,14 @@
     margin: 0.3rem;
 }
 .recents-tags div p {
-    /* border: 2px solid rgb(65, 3, 235); */
     padding: 0.1rem;
     font-size: 0.8rem;
     border-radius: 0.2rem;
     background-color: rgb(9 0 47 / 38%);
+    border: 1px solid rgb(95, 95, 95);
+    cursor: default;
 }
-.recents-delete span{
 
-}
 .recents-delete span svg{
     font-size: 1.5rem;
     cursor: pointer;

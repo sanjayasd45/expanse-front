@@ -22,7 +22,7 @@
 }
 .home_recents-items {
   width: calc(100% - 4%);
-  height: calc(100vh - 8.6rem);
+  height: calc(100vh - 11.6rem);
   padding: 0.5rem 0;
 }
 .home_recents-items h3 {
@@ -113,4 +113,16 @@
 .home_user0 h2 span{
   text-decoration: underline;
   cursor: pointer;
+}
+
+.model{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: none;
+}
+.model-visible{
+  display: block;
 }

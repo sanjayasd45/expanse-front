@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing:  -box;
     color: blanchedalmond;
 }
 .hide{
@@ -9,6 +9,9 @@
 }
 .visible{
     display: flex;
+}
+.visible-block{
+    display: block !important;
 }
 button{
     all: unset;
@@ -19,6 +22,10 @@ button{
     font-size: 0.9rem;
     margin-top: 1rem;
     font-weight: 600;
+    cursor: pointer;
+}
+button:hover{
+    background-color: rgba(71, 71, 255, 0.589);
 }
 .green svg{
     color: green;

@@ -23,6 +23,7 @@ export const useTodaysTS = () => {
 
 
 export const spendingList = [
+    "Select",
     "Education",
     "Room Rent",
     "Credit Card Bill",

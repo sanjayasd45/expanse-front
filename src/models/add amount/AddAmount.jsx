@@ -1,37 +1,33 @@
 import { useState } from "react";
 import "./AddAmount.css";
-import PropTypes from 'prop-types';
-import { ImCross } from "react-icons/im";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { addAmount } from "../../Apis/amount";
-import { getRecentData } from "../../Store/slices/getRecentData.slice";
+import { addItem } from "../../Store/slices/getRecentData.slice";
+
 // import { addTxn } from "../../Store/slices/getRecentData.slice";
 
 export default function AddAmount({ setIsOpenAmt }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const email = user?.email;
+  const [amt, setAmt] = useState("");
+  const [opt, setOpt] = useState("");
+  const [name, setName] = useState("");
+  const [note, setNote] = useState("");
 
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
-  const email = user?.email
-  const [amt, setAmt] = useState("")
-  const [opt, setOpt] = useState("Sallary");
-  const [name, setName] = useState("")
-  const [note, setNote] = useState("")
-  const handleClick = () => {
-    setIsOpenAmt(false);
-    dispatch(getRecentData({ email }));
-  };
   const handleSelect = (e) => {
     console.log(e.target.value);
     setOpt(e.target.value);
   };
   const handleChange = (e) => {
-    if (!isNaN(e.target.value) && e.target.value !== ' ') {
+    if (!isNaN(e.target.value) && e.target.value !== " ") {
       console.log(e.target.value / 1);
-      setAmt(e.target.value)
+      setAmt(e.target.value);
     } else if (e.target.value / 1 === 0) {
-      setAmt("")
+      setAmt("");
     }
-  }
+  };
 
   const formData = {
     email: user.email,
@@ -39,26 +35,33 @@ export default function AddAmount({ setIsOpenAmt }) {
     Tag: opt,
     name: name,
     note: note,
-    deduction: false
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    addAmount(formData)
-    setAmt("")
-    setOpt("")
-    setName("")
-    setNote("")
-  }
+    deduction: false,
+  };
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const data = await addAmount(formData);
+    dispatch(addItem(data))
+    setAmt("");
+    setOpt("");
+    setName("");
+    setNote("");
+  };
   return (
     <div className="add_amount">
       <form action="" className="add_amount-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="amount">Enter Amount</label>
-          <input name="amount" placeholder="1000" value={amt} onChange={handleChange} ></input>
+          <input
+            name="amount"
+            placeholder="1000"
+            value={amt}
+            onChange={handleChange}
+          ></input>
         </div>
         <div>
           <label htmlFor="tag">Select Tag</label>
           <select className="add_amount-opt" onChange={handleSelect}>
+            <option>Select</option>
             <option>Sallary</option>
             <option>Udhari vapas milna</option>
             <option>Creditor</option>
@@ -66,24 +69,36 @@ export default function AddAmount({ setIsOpenAmt }) {
             <option>Investment</option>
           </select>
         </div>
-        {opt === "Creditor" || opt === "Client" || opt === "Udhari vapas milna" ? (
+        {opt === "Creditor" ||
+        opt === "Client" ||
+        opt === "Udhari vapas milna" ? (
           <div>
             <label htmlFor="name">Enter Name</label>
-            <input name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}></input>
+            <input
+              name="name"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></input>
           </div>
         ) : null}
         <div>
           <label htmlFor="note">Enter Note</label>
-          <input name="note" placeholder="Note" value={note} onChange={(e) => setNote(e.target.value)}></input>
+          <input
+            name="note"
+            placeholder="Note"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          ></input>
         </div>
-        <button type="submit">Add Amount</button>
+        <div className="add_amount-bnts">
+          <button type="button" onClick={() => setIsOpenAmt(false)}>Cancel</button>
+          <button type="submit">Add Amount</button>
+        </div>
       </form>
-      <div className="add_amount-crossIcon" onClick={handleClick}>
-        <ImCross />
-      </div>
     </div>
   );
 }
 AddAmount.propTypes = {
-  setIsOpenAmt: PropTypes.func.isRequired
+  setIsOpenAmt: PropTypes.func.isRequired,
 };
