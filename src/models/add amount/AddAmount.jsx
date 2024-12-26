@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { addAmount } from "../../Apis/amount";
 import { addItem } from "../../Store/slices/getRecentData.slice";
+import { toast } from "react-toastify";
 
 // import { addTxn } from "../../Store/slices/getRecentData.slice";
 
@@ -38,11 +39,16 @@ export default function AddAmount({ setIsOpenAmt }) {
     deduction: false,
   };
   const handleSubmit = async(e) => {
+    if(formData.Tag === "" || formData.Tag === "Select"){
+      toast.warn("Please Select a Tag", {
+        theme : "colored"
+      })
+    }
     e.preventDefault();
     const data = await addAmount(formData);
     dispatch(addItem(data))
+    setIsOpenAmt(false)
     setAmt("");
-    setOpt("");
     setName("");
     setNote("");
   };

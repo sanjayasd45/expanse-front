@@ -4,6 +4,7 @@ import { deleteTxn } from '../../Apis/delete.apis';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteItemById } from '../../Store/slices/getRecentData.slice';
+import { toast } from 'react-toastify';
 
 export default function DeleteTxn({txnToDelete, setDelMdl, delMdl}) {
   const dispatch = useDispatch()
@@ -15,6 +16,9 @@ export default function DeleteTxn({txnToDelete, setDelMdl, delMdl}) {
       deleteTxn({ _id: txnToDelete._id });
       dispatch(deleteItemById(txnToDelete._id))
       setDelMdl(false);
+      toast.success("Deleted succesfully!",{
+        theme: "colored",
+      })
     } catch (error) {
       console.error("Error in handleConfirm:", error);
     }

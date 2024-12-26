@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import '../add amount/AddAmount.css'
 import { AddSpending } from '../../Apis/spending';
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, getRecentData } from '../../Store/slices/getRecentData.slice';
+import { addItem } from '../../Store/slices/getRecentData.slice';
 import { spendingList } from '../../helper/helper.cac';
 
 export default function AddSpendings({setIsSpending}) {
@@ -28,19 +28,19 @@ export default function AddSpendings({setIsSpending}) {
 
       const dataToAdd = await AddSpending({...data, email, Tag, deduction : true})
       console.log({...data, email, Tag, deduction : true});
+      setIsSpending(false)
       
       setData({
         amount : "",
         name : "",
         note : ""
       })
-      setTag("")
       dispatch(addItem(dataToAdd))
       // setIsSpending(false)
     }
     
     return (
-        <div className="add_amount">
+        <div className="add_amount"> 
           <form action="" className="add_amount-form" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="amount">Enter Amount</label>
@@ -68,7 +68,7 @@ export default function AddSpendings({setIsSpending}) {
             </div>
             <div className='spending-btns'>
               <button type='button' onClick={() => setIsSpending(false)}>Cancel</button>
-              <button type="submit" onClick={() => setIsSpending(false)}>Add Spending</button>
+              <button type="submit" >Add Spending</button>
             </div>
           </form>
         </div>
