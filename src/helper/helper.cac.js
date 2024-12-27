@@ -35,7 +35,7 @@ export const spendingList = [
     "Grocery",
     "Medical",
     "Repairing",
-    "Udhari Lena",
     "Udhari Dena",
+    "Gratitude Pay",
     "Other"
 ];

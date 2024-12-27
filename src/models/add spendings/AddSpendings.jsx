@@ -6,6 +6,8 @@ import { AddSpending } from '../../Apis/spending';
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from '../../Store/slices/getRecentData.slice';
 import { spendingList } from '../../helper/helper.cac';
+import { toast } from 'react-toastify';
+import { namelist } from '../../helper/listdata';
 
 export default function AddSpendings({setIsSpending}) {
   const dispatch = useDispatch()
@@ -23,20 +25,40 @@ export default function AddSpendings({setIsSpending}) {
             [name]: name === "amount" ? (isNaN(Number(value)) ? previous[name] : Number(value)) : value
         }))
     }
+    const nameCondition = (tag) => {
+      return namelist.some((el) => el === tag);
+    };
+
     const handleSubmit = async(e) => {
       e.preventDefault()
-
-      const dataToAdd = await AddSpending({...data, email, Tag, deduction : true})
-      console.log({...data, email, Tag, deduction : true});
-      setIsSpending(false)
-      
-      setData({
-        amount : "",
-        name : "",
-        note : ""
-      })
-      dispatch(addItem(dataToAdd))
-      // setIsSpending(false)
+      if(data.amount === ""){
+        toast.warn("Please Enter Amount", {
+          theme : "colored"
+        })
+      }else if(Tag === "" || Tag === "Select"){
+        toast.warn("Please Select Tag", {
+          theme : "colored"
+        })
+      }else if( nameCondition(Tag) && data.name === ""){
+        toast.warn("Please Enter Name", {
+          theme : "colored"
+        })
+      }else if(data.note === ""){
+        toast.warn("Please Enter Note", {
+          theme : "colored"
+        })
+      }else{
+        const dataToAdd = await AddSpending({...data, email, Tag, deduction : true})
+        console.log({...data, email, Tag, deduction : true});
+        setIsSpending(false)
+        
+        setData({
+          amount : "",
+          name : "",
+          note : ""
+        })
+        dispatch(addItem(dataToAdd))
+      }
     }
     
     return (
@@ -56,7 +78,7 @@ export default function AddSpendings({setIsSpending}) {
                 }
               </select>
             </div>
-            {Tag === "Udhari Lena" || Tag === "Udhari Dena" ? (
+            {Tag === "Udhari Lena" || Tag === "Udhari Dena" || Tag ===  "Gratitude Pay"? (
               <div>
                 <label htmlFor="name">Enter Name</label>
                 <input name="name" placeholder="Name" value={data.name} onChange={handleChange}></input>

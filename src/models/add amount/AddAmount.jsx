@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAmount } from "../../Apis/amount";
 import { addItem } from "../../Store/slices/getRecentData.slice";
 import { toast } from "react-toastify";
+import { namelist } from "../../helper/listdata";
 
 // import { addTxn } from "../../Store/slices/getRecentData.slice";
 
@@ -29,6 +30,10 @@ export default function AddAmount({ setIsOpenAmt }) {
       setAmt("");
     }
   };
+  const nameCondition = (tag) => {
+    return namelist.some((el) => el === tag);
+  };
+  
 
   const formData = {
     email: user.email,
@@ -40,17 +45,40 @@ export default function AddAmount({ setIsOpenAmt }) {
   };
   const handleSubmit = async(e) => {
     if(formData.Tag === "" || formData.Tag === "Select"){
+      e.preventDefault();
       toast.warn("Please Select a Tag", {
         theme : "colored"
       })
+    } else if(nameCondition(formData.Tag) && formData.name === ""){
+      e.preventDefault();
+      toast.warn("Please Enter Name", {
+        theme : "colored" 
+      })
+    } else if(formData.note === ""){
+      e.preventDefault();
+      toast.warn("Please Enter Note", {
+        theme : "colored"
+      })
+    } else if(formData.amount === ""){
+      e.preventDefault();
+      toast.warn("Please Enter Amount", {
+        theme : "colored"
+      })
+    }else{
+      try{
+        e.preventDefault();
+        const data = await addAmount(formData);
+        dispatch(addItem(data))
+        setIsOpenAmt(false)
+        setAmt("");
+        setName("");
+        setNote("");
+      }catch(err){
+        toast.error(err.message, {
+          theme : "colored"
+        })
+      }
     }
-    e.preventDefault();
-    const data = await addAmount(formData);
-    dispatch(addItem(data))
-    setIsOpenAmt(false)
-    setAmt("");
-    setName("");
-    setNote("");
   };
   return (
     <div className="add_amount">
@@ -70,6 +98,7 @@ export default function AddAmount({ setIsOpenAmt }) {
             <option>Select</option>
             <option>Sallary</option>
             <option>Udhari vapas milna</option>
+            <option>Udhari Lena</option>
             <option>Creditor</option>
             <option>Client</option>
             <option>Investment</option>
@@ -77,7 +106,8 @@ export default function AddAmount({ setIsOpenAmt }) {
         </div>
         {opt === "Creditor" ||
         opt === "Client" ||
-        opt === "Udhari vapas milna" ? (
+        opt === "Udhari vapas milna" || 
+        opt === "Udhari Lena" ? (
           <div>
             <label htmlFor="name">Enter Name</label>
             <input
