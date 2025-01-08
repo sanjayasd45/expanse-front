@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .add_amount-form div{
     width: 100%;
     display: flex;
@@ -12,4 +13,14 @@
 }
 .add_amount-form div select{
     width: 55%;
+}
+.add_amount-amount {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 426px){
+    .add_amount{
+        width: 92%;
+    }
 }

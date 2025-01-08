@@ -21,6 +21,14 @@ export const useTodaysTS = () => {
     return data;
 };    
 
+export const evaluateExpression = (expression) => {
+    let multiplicationResult = expression.split('+').map(part => {
+      return part.split('*').reduce((acc, num) => acc * Number(num), 1);
+    }).join('+');
+
+    return multiplicationResult.split('+').reduce((acc, num) => acc + Number(num), 0);
+  };
+
 
 export const spendingList = [
     "Select",

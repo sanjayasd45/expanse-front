@@ -12,7 +12,6 @@ import { namelist } from "../../helper/listdata";
 export default function AddAmount({ setIsOpenAmt }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const email = user?.email;
   const [amt, setAmt] = useState("");
   const [opt, setOpt] = useState("");
   const [name, setName] = useState("");
@@ -79,6 +78,9 @@ export default function AddAmount({ setIsOpenAmt }) {
         })
       }
     }
+    toast.success("Added Successfully!",{
+      theme: "colored",
+    })
   };
   return (
     <div className="add_amount">

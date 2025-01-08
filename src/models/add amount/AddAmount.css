@@ -47,3 +47,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media (max-width: 426px){
+    .add_amount{
+        width: 92%;
+    }
+}
