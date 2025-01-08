@@ -1,5 +1,5 @@
-import Profile from "../../components/profile/Profile";
-import Sidebar from "../../components/sidebar/sidebar";
+
+import Sidebar from "../../components/sidebar/Sidebar";
 import Filter from '../../components/filter/Filter'
 import { IoMenu } from "react-icons/io5";
 
