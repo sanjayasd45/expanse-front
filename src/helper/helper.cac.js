@@ -31,6 +31,7 @@ export const spendingList = [
     "Petrol",
     "Wearables",
     "Beauty",
+    "Fast food",
     "Fare",
     "Grocery",
     "Medical",

@@ -33,11 +33,13 @@
     display: flex;
     justify-content: space-between;
     padding: 3rem 10% 0 10%;
+    align-items: center;
 
 }
 .sidebar_btns a {
-    font-size: 0.7rem;
+    font-size: 1rem;
 }
-.sidebar_btns p{
+.sidebar_btns p svg{
     cursor: pointer;
+    font-size: 1.5rem;
 }
