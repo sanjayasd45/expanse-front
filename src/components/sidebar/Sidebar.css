@@ -1,0 +1,43 @@
+.sidebar{
+    width: 100%;
+}
+.sidebar_content{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    gap: 1.5rem;
+}
+.sidebar_content h2{
+    padding-left: 10%;
+}
+.sidebar_opt{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.sidebar_opt p{
+    padding-left: 10%;
+    padding: 2% 0 2% 10%;
+    cursor: pointer;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+.sidebar_opt p svg{
+    font-size: 1.3rem;
+}
+.sidebar_opt p:hover{
+    background-color: rgb(59, 59, 59);
+}
+.sidebar_btns{
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 10% 0 10%;
+
+}
+.sidebar_btns a {
+    font-size: 0.7rem;
+}
+.sidebar_btns p{
+    cursor: pointer;
+}

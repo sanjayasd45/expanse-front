@@ -1,0 +1,92 @@
+.dashboard{
+    width: 100%;
+    height: 100vh;
+    background-color: #121212;
+}
+.dashboard-c{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+.dashboard-c button{
+    font-size: 1.3rem;
+    width: calc(100% - 10%);
+    align-content: center;
+}
+.dashboard-c-s{
+    width: calc(100% - 1.5rem);
+    height: calc(100vh - 8rem);
+    overflow: auto;
+    /* border: 1px solid red; */
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,0.7903536414565826) 0%, rgba(67,9,121,0.8239670868347339) 35%, rgba(0,31,255,0.17690826330532217) 100%);
+    margin-top: 1rem;
+    border-radius: 5px;
+    /* padding: 0.8rem; */
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.dashboard-c-s div{
+    /* border: 1px solid red; */
+    padding: 0.3rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.dashboard-c-s div p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+.dashboard-c-s-b{
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+.dashboard-c-s-t{
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+.dashboard-tags{
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+.dashboard-c-s-b p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dashboard-c-s-f {
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+
+}
+.dashboard-c-s-f select{
+    all: unset;
+    font-size: 1.3rem;
+    font-weight: 600;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #252222;
+    cursor: pointer;
+    border-radius: 0.2rem;
+}
+.dashboard-c-s-f select option{
+    all: unset;
+    background-color: rgb(0, 0, 56);
+}
+.dashboard_btns {
+    display: flex;
+    gap: 0.5rem;
+}
+.dashboard_btns p{
+    font-size: 2.5rem;
+    width: 100%;
+}
