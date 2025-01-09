@@ -7,9 +7,7 @@ import { Link } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
 
 
-export default function Sidebar({menu, setMenu}) {
-
-
+export default function Sidebar({menu, setMenu, handleSidebarChange}) {
 
   return (
     <div className={`${menu ? "hide" : "sidebar"}`}>
@@ -22,11 +20,11 @@ export default function Sidebar({menu, setMenu}) {
         <div className="sidebar_content">
             <h2>Dashboard</h2>
             <div className='sidebar_opt'>
-                <p><ImProfile />Profile</p>
-                <p><MdOutlineDateRange/>Filter By Date</p>
-                <p><FaFilter />Filter By Tags</p>
-                <p><MdOutlineSummarize/>Udhari Summary</p>
-                <p><MdSummarize />Summary</p>
+                <p onClick={handleSidebarChange}><ImProfile />Profile</p>
+                <p onClick={handleSidebarChange}><MdOutlineDateRange/>Filter By Date</p>
+                <p onClick={handleSidebarChange}><FaFilter />Filter By Tags</p>
+                <p onClick={handleSidebarChange}><MdOutlineSummarize/>Udhari Summary</p>
+                <p onClick={handleSidebarChange}><MdSummarize />Summary</p>
             </div>
         </div>
     </div>

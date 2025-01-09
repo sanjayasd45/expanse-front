@@ -8,6 +8,7 @@
 .ds_sidebar{
     width: 22%;
     border-right: 1px solid rgb(161, 133, 133);
+    z-index: 2;
 }
 .ds_main{
     width: 100%;
@@ -17,6 +18,7 @@
     position: absolute;
     top: 1rem;
     left: 1rem;
+    
 }
 .ds_sidebar_menu svg{
     cursor: pointer;

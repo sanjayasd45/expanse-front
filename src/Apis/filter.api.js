@@ -79,3 +79,20 @@ export const fromRange = async(data) => {
         console.log(err);
     }
 }
+export const dateByRange = async(data) => {  
+    try{
+        const responce = await axios.post(`${baseUrl}/filter/by-range` , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body : data
+        })
+        const data1 = await responce.data
+        console.log(data1);
+        
+        return data1
+    }catch(err){
+        console.log(err);
+    }
+}

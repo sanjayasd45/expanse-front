@@ -11,7 +11,7 @@ const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 export default function Auth() {
     const  dispatch = useDispatch()
     const userData = useSelector(state => state.user) 
-    console.log(userData);
+    // console.log(userData);
     
     const navigate = useNavigate() 
     const [loginS, setLogin] = useState("auth_active")
@@ -56,11 +56,14 @@ export default function Auth() {
             );
     
             const data = response.data;
+            console.log(data);
+            
             const userData = {
                 name: data.name,
                 username: data.username,
                 email: data.email,
                 token: data.token,
+                createdAt : data.createdAt
             };
     
             localStorage.setItem("authToken", data.token);

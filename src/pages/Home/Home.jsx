@@ -11,27 +11,26 @@ import { getRecentData } from "../../Store/slices/getRecentData.slice";
 import { useTodaysTS } from "../../helper/helper.cac";
 import { useNavigate } from "react-router-dom";
 import DeleteTxn from "../../models/delete/DeleteTxn";
+import { IoOpenOutline } from "react-icons/io5";
+
 
 export default function Home() {
   const navigate = useNavigate()
   const email = useSelector((state) => state.user).email;
-  const [plusAnim, setPlusAnim] = useState(false);
-  const [visibility, setVisibility] = useState("visible");
   const [isOpenAmt, setIsOpenAmt] = useState(false);
   const [isSpending, setIsSpending] = useState(false);
   const [txnToDelete, setTxnToDelete] = useState(null)
   const [delMdl, setDelMdl] = useState(false)
+  const [showBtn, setShowBtn] = useState(false)
 
   const topData = useTodaysTS();
 
-  const handleClick = (e) => {
-    console.log(e.target);
-    setPlusAnim(!plusAnim);
-    plusAnim ? setVisibility("visible") : setVisibility("visible");
-  };
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(window.scrollY){
+      console.log("scrolled");
+    }
     if (email !== "") {
       dispatch(getRecentData({ email }));
     }
@@ -78,31 +77,19 @@ export default function Home() {
           </div>
           <div className="home_recents-items">
             <h3>{`Transactions`}</h3>
-            <div className="home_recents-items1">
+            <div className="home_recents-items1" onClick={() => setShowBtn(false)}>
               {recentDataList?.map((item) => (
                 <Recent key={item._id} item={item} txnToDeleted={txnToDeleted} />
               ))}
             </div>
           </div>
           <div className="home_addBtn">
-            <div
-              className={
-                plusAnim ? `home_addBtn-icon animate-plus` : `home_addBtn-icon`
-              }
-              onClick={handleClick}
-            >
-              <FaPlus />
-            </div>
-            <div
-              className={
-                plusAnim ? `home_addBtn-item animate-item` : `home_addBtn-item`
-              }
-              style={{ visibility: visibility }}
-            >
+            <div className={`${showBtn ? "hide" : "btn_show"}`} onClick={() => setShowBtn(true)}><IoOpenOutline /></div>
+            <div className={`${showBtn ? "home_addBtn-item" : "hide"}`} onClick={() => setShowBtn(false)}>
               <p onClick={() => setIsOpenAmt(true)}>Add Amount</p>
               <p onClick={() => setIsSpending(true)}>Add Spendings</p>
             </div>
-          </div>
+          </div> 
           <div className={` ${isOpenAmt ? "model visible-block" : "model"}`}>
             <AddAmount isOpenAmt={isOpenAmt} setIsOpenAmt={setIsOpenAmt} />
             <div className="overlay" onClick={() => setIsOpenAmt(false)}></div>

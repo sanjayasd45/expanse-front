@@ -12,10 +12,12 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            console.log(action)
+            console.log(action.payload);
+            
             state.name = action?.payload?.name;
             state.username = action?.payload?.username;
             state.email = action?.payload?.email;
+            state.createdAt = action?.payload?.createdAt            
         },
     }
 });

@@ -3,7 +3,6 @@ import { MdDelete } from "react-icons/md";
 import PropTypes from 'prop-types';
 
 export default function Recent({item, txnToDeleted, delMdl}) {
-  console.log(item);
   let stl = " rgb(55 255 39 / 25%)"
   if(item?.deduction){
     stl = "rgb(251 55 0 / 25%)"
