@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 
 const DateRangePicker = () => {
   const user = useSelector(state => state.user)  
+  console.log(user);
+  
   
   const minimumDate = new Date(user.createdAt)
   const today = new Date()
