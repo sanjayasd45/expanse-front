@@ -9,11 +9,9 @@ import DateRangePicker from "../../components/filter by date/DateRangePicker";
 export default function Dashboard() {
   const [menu, setMenu] = useState(false)
   const [side, setSide]  = useState("Summary")
-  const handleSidebarChange  = (e) => {
-    const eventData = e.target.__reactProps$bu1tmouxdxp.children[1]
-    if(typeof(eventData) == "string"){
-      setSide(e.target.__reactProps$bu1tmouxdxp.children[1])
-      console.log(e.target.__reactProps$bu1tmouxdxp.children[1]);
+  const handleSidebarChange  = (e) => {    
+    if(typeof(e.target.textContent) === "string" && e.target.textContent !== "" ){
+      setSide(e.target.textContent)
     }
   }
   // Profile
