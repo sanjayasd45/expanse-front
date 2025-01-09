@@ -8,16 +8,12 @@ import { toast } from "react-toastify";
 
 const DateRangePicker = () => {
   const user = useSelector(state => state.user)  
-  const minimumDate = new Date("2024-11-11")
+  const minimumDate = new Date(user.createdAt)
   const today = new Date()
   console.log("minimumDate", minimumDate);
   console.log("to day", today);
-  let minDate = null
-  let maxDate = null
-  if (isNaN(minimumDate.getTime()) || isNaN(today.getTime())) {
-    minDate = minimumDate.toISOString().split("T")[0]; 
-    maxDate = today.toISOString().split("T")[0]; 
-  }
+  let minDate = minimumDate.toISOString().split("T")[0]
+  let maxDate = today.toISOString().split("T")[0]
   
   const [isChecked, setIsChecked] = useState(false)
   const [rangeData, setRangeData] = useState(null)
@@ -40,6 +36,7 @@ const DateRangePicker = () => {
       toast.error("From date is required", {
         theme : "colored"
       })
+      return
     }
     const data  = {
       ...date,
