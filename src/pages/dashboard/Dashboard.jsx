@@ -10,7 +10,7 @@ export default function Dashboard() {
   const [menu, setMenu] = useState(false)
   const [side, setSide]  = useState("Summary")
   const handleSidebarChange  = (e) => {    
-    if(typeof(e.target.textContent) === "string" && e.target.textContent !== "" ){
+    if(typeof(e.target.textContent) === "string" && e.target.textContent !== ""){
       setSide(e.target.textContent)
     }
   }

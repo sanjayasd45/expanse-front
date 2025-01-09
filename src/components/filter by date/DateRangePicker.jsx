@@ -3,6 +3,7 @@ import "./DateRangePicker.css";
 import Recent from "../recent/Recent";
 import { useSelector } from "react-redux";
 import { dateByRange } from "../../Apis/filter.api";
+import { toast } from "react-toastify";
 
 
 const DateRangePicker = () => {
@@ -10,9 +11,19 @@ const DateRangePicker = () => {
   
   const minimumDate = new Date(user.createdAt)
   const today = new Date()
+  console.log("minimumDate", minimumDate);
+  console.log("to day", today);
+  let minDate = null
+  let maxDate = null
+  if (isNaN(minimumDate.getTime()) || isNaN(today.getTime())) {
+    toast.success("Invalid date format. Use YYYY-MM-DD.",{
+       theme: "colored",
+     })
+  }else{
+    minDate = minimumDate.toISOString().split("T")[0]; 
+    maxDate = today.toISOString().split("T")[0]; 
+  }
   
-  const minDate = minimumDate.toISOString().split("T")[0]; 
-  const maxDate = today.toISOString().split("T")[0]; 
   
   const [isChecked, setIsChecked] = useState(false)
   const [rangeData, setRangeData] = useState(null)
