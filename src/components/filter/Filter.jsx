@@ -50,7 +50,7 @@ export default function Dashboard() {
     <div className="dashboard">
       <div className="dashboard-c">
         <div className="dashboard_btns">
-          <p>Filter By Date</p>
+          <p>Filter By Range</p>
           {/* <button>Add remote users</button> */}
         </div>
         <div className="dashboard-c-s">
@@ -72,13 +72,13 @@ export default function Dashboard() {
               {spendingList.includes(element?._id) ? (
                 <span style={{ color: "#ff1a00" }}>₹{element.sum} </span>
               ) : (
-                <span style={{ color: "rgb(72 255 0)" }}> ₹{element.sum}</span>
+                <span style={{ color: "rgb(72 255 0)" }}>₹{element.sum}</span>
               )}
             </div>
           ))}
           {data?.balance ? (
             <div className="dashboard-c-s-b">
-              Balance <span>₹{data?.balance}</span>
+              Balance <span>₹ {data?.balance}</span>
             </div>
           ) : null}
         </div>

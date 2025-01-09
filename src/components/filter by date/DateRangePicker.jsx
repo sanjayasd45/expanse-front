@@ -10,8 +10,6 @@ const DateRangePicker = () => {
   const user = useSelector(state => state.user)  
   const minimumDate = new Date(user.createdAt)
   const today = new Date()
-  console.log("minimumDate", minimumDate);
-  console.log("to day", today);
   let minDate = minimumDate.toISOString().split("T")[0]
   let maxDate = today.toISOString().split("T")[0]
   
@@ -117,7 +115,7 @@ const DateRangePicker = () => {
                     <p key={item.index - 1}>
                       {item._id}
                     </p>
-                    <p key={item.index - 2} style={item.deduction ? {color : "red"} : {color : "green"}}>
+                    <p key={item.index - 2} style={item.deduction ? {color : "#ff6f6f"} : {color : "#4fe74f"}}>
                     ₹ {item.sum}
                     </p>
                   </div>

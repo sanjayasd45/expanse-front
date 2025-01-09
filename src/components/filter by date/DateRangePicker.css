@@ -125,6 +125,9 @@ input svg {
   flex-direction: row;
   justify-content: space-between;
   font-size: 1.2rem;
+  background-color: #04040e9c;
+  padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+  border-radius: 0.5rem;
 }
 
 @media (max-width : 426px) {
@@ -164,10 +167,11 @@ input svg {
         align-items: center;
     }
     .range-data{
-      margin: 0.5rem 1rem 0.5rem 1rem;
+      margin: 0.5rem 0.5rem 0.5rem 0.5rem;
     }
     .range-data-key{
       font-size: 1rem;
+
     }
       
 }
