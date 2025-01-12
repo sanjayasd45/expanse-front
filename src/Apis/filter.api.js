@@ -96,3 +96,37 @@ export const dateByRange = async(data) => {
         console.log(err);
     }
 }
+export const serachUdhari = async(data) => {  
+    try{
+        const responce = await axios.post(`${baseUrl}/filter/search-udhari` , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body : data
+        })
+        const data1 = await responce.data
+        console.log(data1);
+        
+        return data1
+    }catch(err){
+        console.log(err);
+    }
+}
+export const searchByTags = async(data) => {  
+    try{
+        const responce = await axios.post(`${baseUrl}/filter/search-by-tags` , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body : data
+        })
+        const data1 = await responce.data
+        console.log(data1);
+        
+        return data1
+    }catch(err){
+        console.log(err);
+    }
+}

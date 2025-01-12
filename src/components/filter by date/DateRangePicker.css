@@ -10,7 +10,7 @@ input svg {
 .date-range-picker{
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 .drp_head{
     place-items: center;

@@ -50,7 +50,7 @@ export default function Dashboard() {
     <div className="dashboard">
       <div className="dashboard-c">
         <div className="dashboard_btns">
-          <p>Filter By Range</p>
+          <h1>Filter By Range</h1>
           {/* <button>Add remote users</button> */}
         </div>
         <div className="dashboard-c-s">

@@ -5,15 +5,22 @@ import { IoMenu } from "react-icons/io5";
 import './Dashboard.css'
 import { useState } from "react";
 import DateRangePicker from "../../components/filter by date/DateRangePicker";
+import Udhari from "../../components/udhari/Udhari";
+import SerchByTags from "../../components/serach by tags/SerchByTags";
 
 export default function Dashboard() {
+  
   const [menu, setMenu] = useState(false)
   const [side, setSide]  = useState("Summary")
   const handleSidebarChange  = (e) => {    
     if(typeof(e.target.textContent) === "string" && e.target.textContent !== ""){
       setSide(e.target.textContent)
     }
+    if(window.innerWidth < "426"){
+      setMenu(true)
+    }
   }
+
   // Profile
   // Filter By Date
   // Filter By Tags
@@ -32,7 +39,11 @@ export default function Dashboard() {
       <div className="ds_main">
         {
           side === "Summary" ?  <Filter /> : (
-            side === "Filter By Date" ? <DateRangePicker/> : <Filter />  
+            side === "Filter By Date" ? <DateRangePicker/> : (
+              side === "Udhari Summary" ? <Udhari/> : (
+                side === "Filter By Tags" ? <SerchByTags/> : <Filter/>
+              )
+            )
           )
         }
         

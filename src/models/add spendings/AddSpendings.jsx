@@ -70,10 +70,10 @@ export default function AddSpendings({ setIsSpending }) {
         note: ""
       })
       dispatch(addItem(dataToAdd))
+      toast.success("Added Successfully!",{
+        theme: "colored",
+      })
     }
-    toast.success("Added Successfully!",{
-      theme: "colored",
-    })
   }
 
   return (
@@ -96,7 +96,7 @@ export default function AddSpendings({ setIsSpending }) {
             }
           </select>
         </div>
-        {Tag === "Udhari Lena" || Tag === "Udhari Dena" || Tag === "Gratitude Pay" ? (
+        {Tag === "Borrow" || Tag === "Lend" || Tag === "Gratitude Pay" || Tag === "Repay Loan"? (
           <div>
             <label htmlFor="name">Enter Name</label>
             <input name="name" placeholder="Name" value={data.name} onChange={handleChange}></input>

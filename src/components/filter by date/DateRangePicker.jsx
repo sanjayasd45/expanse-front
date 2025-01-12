@@ -62,6 +62,7 @@ const DateRangePicker = () => {
               <input
                 name="startDate"
                 id="start-date"
+                placeholder="dd/mm/yyyy"
                 onChange={handleDateChange}
                 type="date"
                 value={date.startDate}
@@ -75,6 +76,7 @@ const DateRangePicker = () => {
                 name="endDate"
                 id="end-date"
                 value={date.endDate}
+                placeholder="dd/mm/yyyy"
                 onChange={handleDateChange}
                 type="date"
                 min={minDate}

@@ -1,0 +1,63 @@
+.udhari {
+    display: flex;
+    flex-direction: column;
+}
+.udhari h1{
+    margin-top: 1rem;
+    align-self: center;
+}
+.udhari-content{
+    width: calc(100% - 1.5rem);
+    height: calc(100vh - 6rem);
+    overflow: auto;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.7903536414565826) 0%, rgba(67, 9, 121, 0.8239670868347339) 35%, rgba(0, 31, 255, 0.17690826330532217) 100%);
+    margin-top: 1rem;
+    border-radius: 5px;
+    display: flex;
+    margin-left: 0.7rem;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.udhari-data{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+.udhari-data details{
+    margin-bottom: 1rem;
+    border: 1px solid rebeccapurple;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,0.7903536414565826) 0%, rgba(67,9,121,0.8239670868347339) 16%, rgba(188,0,255,0.22172619047619047) 100%);
+}
+.udhari-data details summary{
+    cursor: pointer;
+}
+.udhari-data details div p{
+    margin: 0.5rem 0 0 0.5rem;
+}
+.udhari-data-items ul li{
+    font-size: 0.9rem;
+}
+.udhari-data-items ul li:first-child{
+    margin-bottom: 0.5rem;
+    font-weight: bolder;
+    font-size: 1.1rem;
+}
+.udhari-data-items {
+    display: flex;
+    /* margin-left: 0.5rem; */
+    margin-top: 0.5rem;
+    /* border: 1px solid red; */
+    background-color: #04040e9c;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+
+}
+.udhari-data-items ul li {
+    list-style: none;
+    text-decoration: none;
+    
+}

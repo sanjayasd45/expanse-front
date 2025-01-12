@@ -1,9 +1,9 @@
 
 export const namelist = [
-    "Udhari vapas milna",
+    "Repayment",
     "Creditor",
     "Client",
-    "Udhari Lena",
-    "Udhari Dena",
+    "Borrow",
+    "Lend",
     "Gratitude Pay",
 ]

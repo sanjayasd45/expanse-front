@@ -43,6 +43,8 @@ export default function AddAmount({ setIsOpenAmt }) {
     deduction: false,
   };
   const handleSubmit = async(e) => {
+    console.log("submit");
+    
     if(formData.Tag === "" || formData.Tag === "Select"){
       e.preventDefault();
       toast.warn("Please Select a Tag", {
@@ -65,22 +67,24 @@ export default function AddAmount({ setIsOpenAmt }) {
       })
     }else{
       try{
+        
         e.preventDefault();
         const data = await addAmount(formData);
+        console.log(formData);
         dispatch(addItem(data))
         setIsOpenAmt(false)
         setAmt("");
         setName("");
         setNote("");
+        toast.success("Added Successfully!",{
+          theme: "colored",
+        })
       }catch(err){
         toast.error(err.message, {
           theme : "colored"
         })
       }
     }
-    toast.success("Added Successfully!",{
-      theme: "colored",
-    })
   };
   return (
     <div className="add_amount">
@@ -99,8 +103,8 @@ export default function AddAmount({ setIsOpenAmt }) {
           <select className="add_amount-opt" onChange={handleSelect}>
             <option>Select</option>
             <option>Sallary</option>
-            <option>Udhari vapas milna</option>
-            <option>Udhari Lena</option>
+            <option>Repayment</option>
+            <option>Borrow</option>
             <option>Creditor</option>
             <option>Client</option>
             <option>Investment</option>
@@ -108,8 +112,8 @@ export default function AddAmount({ setIsOpenAmt }) {
         </div>
         {opt === "Creditor" ||
         opt === "Client" ||
-        opt === "Udhari vapas milna" || 
-        opt === "Udhari Lena" ? (
+        opt === "Repayment" || 
+        opt === "Borrow" ? (
           <div>
             <label htmlFor="name">Enter Name</label>
             <input
