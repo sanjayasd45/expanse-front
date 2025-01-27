@@ -17,8 +17,6 @@ export default function Dashboard() {
       const data = await alltimeData(user);
       setData(data);
     };
-    console.log("user", user);
-
     user.email ? getData() : null;
   }, [user]);
 

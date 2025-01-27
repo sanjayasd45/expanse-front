@@ -1,6 +1,5 @@
 import Navbar from "../../components/Navbar/Navbar";
 import Recent from "../../components/recent/Recent";
-import { FaPlus } from "react-icons/fa";
 
 import "./Home.css";
 import { useEffect, useState } from "react";

@@ -91,6 +91,7 @@ export default function AddSpendings({ setIsSpending }) {
         Tag,
         deduction: true,
       });
+  
       setData({
         amount: "",
         name: "",

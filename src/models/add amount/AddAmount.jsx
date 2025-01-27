@@ -6,11 +6,13 @@ import { addAmount } from "../../Apis/amount";
 import { addItem } from "../../Store/slices/getRecentData.slice";
 import { toast } from "react-toastify";
 import { namelist } from "../../helper/listdata";
+import { Loader } from "../../components/Sudo components/Loader";
 
 // import { addTxn } from "../../Store/slices/getRecentData.slice";
 
 export default function AddAmount({ setIsOpenAmt }) {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
   const user = useSelector((state) => state.user);
   const [amt, setAmt] = useState("");
   const [opt, setOpt] = useState("");
@@ -43,32 +45,31 @@ export default function AddAmount({ setIsOpenAmt }) {
     deduction: false,
   };
   const handleSubmit = async(e) => {
-    console.log("submit");
+    e.preventDefault();
+    setLoading(true)
     
     if(formData.Tag === "" || formData.Tag === "Select"){
-      e.preventDefault();
       toast.warn("Please Select a Tag", {
         theme : "colored"
       })
+      setLoading(false)
     } else if(nameCondition(formData.Tag) && formData.name === ""){
-      e.preventDefault();
       toast.warn("Please Enter Name", {
         theme : "colored" 
       })
+      setLoading(false)
     } else if(formData.note === ""){
-      e.preventDefault();
       toast.warn("Please Enter Note", {
         theme : "colored"
       })
+      setLoading(false)
     } else if(formData.amount === ""){
-      e.preventDefault();
       toast.warn("Please Enter Amount", {
         theme : "colored"
       })
+      setLoading(false)
     }else{
       try{
-        
-        e.preventDefault();
         const data = await addAmount(formData);
         console.log(formData);
         dispatch(addItem(data))
@@ -76,13 +77,16 @@ export default function AddAmount({ setIsOpenAmt }) {
         setAmt("");
         setName("");
         setNote("");
+        setLoading(false)
         toast.success("Added Successfully!",{
           theme: "colored",
         })
+
       }catch(err){
         toast.error(err.message, {
           theme : "colored"
         })
+        setLoading(false)
       }
     }
   };
@@ -138,6 +142,9 @@ export default function AddAmount({ setIsOpenAmt }) {
           <button type="submit">Add Amount</button>
         </div>
       </form>
+      {
+        loading ? <Loader/> : ""
+      }
     </div>
   );
 }
