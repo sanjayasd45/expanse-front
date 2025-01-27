@@ -1,24 +1,20 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';  
-import axios from 'axios'
-import './Auth.css'
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import "./Auth.css";
 import { setUser } from "../../Store/slices/user.slice";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
-
-
 export default function Auth() {
-    const  dispatch = useDispatch()
-    const userData = useSelector(state => state.user) 
-    // console.log(userData);
-    
-    const navigate = useNavigate() 
-    const [loginS, setLogin] = useState("auth_active")
-    const [signupS, setSignup] = useState("")
-    const [error, setError] = useState("")
+    const dispatch = useDispatch();
+    const userData = useSelector((state) => state.user);
+    const navigate = useNavigate();
+    const [loginS, setLogin] = useState("auth_active");
+    const [signupS, setSignup] = useState("");
+    const [error, setError] = useState("");
     const initialFormState = {
-        signup: { name: "", username: "", password: "", email : "" },
+        signup: { name: "", username: "", password: "", email: "" },
         login: { username: "", password: "" },
     };
 
@@ -31,45 +27,44 @@ export default function Auth() {
             [formType]: { ...prevForms[formType], [name]: value },
         }));
     };
-    
+
     const handleSubmit = (formType) => async (e) => {
         e.preventDefault();
-        dispatch(setUser({ name: "", username: "", email: "", loading: true }));
-    
+        setError(""); // Clear any previous error
+        dispatch(setUser({ name: "", username: "", email: "", loading: true })); // Start loading
+
         if (forms[formType].password.length < 4) {
             setError("Password should contain more than 3 characters");
             dispatch(setUser({ name: "", username: "", email: "", loading: false })); // Stop loading on error
             return;
         }
-    
+
         try {
             const config = {
                 headers: {
                     "Content-Type": "application/json",
                 },
             };
-    
+
             const response = await axios.post(
                 `${baseUrl}/auth/${formType}`,
                 forms[formType],
                 config
             );
-    
+
             const data = response.data;
-            console.log(data);
-            
             const userData = {
                 name: data.name,
                 username: data.username,
                 email: data.email,
                 token: data.token,
-                createdAt : data.createdAt
+                createdAt: data.createdAt,
             };
-    
+
             localStorage.setItem("authToken", data.token);
             localStorage.setItem("userData", JSON.stringify(userData));
-    
-            dispatch(setUser({ ...userData, loading: false }));
+
+            dispatch(setUser({ ...userData, loading: false })); // Stop loading on success
             setForms((prevForms) => ({
                 ...prevForms,
                 [formType]: initialFormState[formType],
@@ -79,7 +74,7 @@ export default function Auth() {
             const errorMessage =
                 error.response?.data?.message || "Something went wrong";
             setError(errorMessage);
-    
+
             if (formType === "signup" && error.response?.data?.formData) {
                 const formData = {
                     ...error.response.data.formData,
@@ -90,31 +85,34 @@ export default function Auth() {
                     [formType]: formData,
                 }));
             }
-    
-            dispatch(setUser({ name: "", username: "", email: "", loading: false }));
+
+            dispatch(setUser({ name: "", username: "", email: "", loading: false })); // Stop loading on error
             console.error("Error:", errorMessage);
         }
     };
-    
 
-    //   navigate("/app/welcome")
     const login = () => {
-        setLogin("auth_active")
-        setSignup("")
-        setError("")
-    }
-    const signup = () => {
-        setLogin("")
-        setSignup("auth_active")
-        setError("")
-    }
+        setLogin("auth_active");
+        setSignup("");
+        setError("");
+    };
 
+    const signup = () => {
+        setLogin("");
+        setSignup("auth_active");
+        setError("");
+    };
 
     return (
         <div className="auth">
             <div className="auth_1">
                 <div className="auth-opt">
-                    <span onClick={login} className={`${loginS}_color`}>Login</span><span className={`${signupS}_color`} onClick={signup}>Signup</span>
+                    <span onClick={login} className={`${loginS}_color`}>
+                        Login
+                    </span>
+                    <span className={`${signupS}_color`} onClick={signup}>
+                        Signup
+                    </span>
                 </div>
                 <p>{error}</p>
                 <form onSubmit={handleSubmit("signup")} className={signupS}>
@@ -147,7 +145,13 @@ export default function Auth() {
                         onChange={handleChange("signup")}
                         placeholder="Password"
                     />
-                    <button type="submit">Sign Up</button>
+                    <button type="submit">
+                        {userData?.loading ? (
+                            <div className="loader"></div>
+                        ) : (
+                            "Sign Up"
+                        )}
+                    </button>
                 </form>
 
                 <form onSubmit={handleSubmit("login")} className={loginS}>
@@ -167,11 +171,12 @@ export default function Auth() {
                         placeholder="Password"
                     />
                     <button type="submit">
-                        {
-                            userData?.loading ? (<div className="loader"></div>) : ("Log In")
-                        }   
+                        {userData?.loading ? (
+                            <div className="loader1"></div>
+                        ) : (
+                            "Log In"
+                        )}
                     </button>
-                    
                 </form>
             </div>
         </div>
