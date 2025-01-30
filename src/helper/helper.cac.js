@@ -49,3 +49,11 @@ export const spendingList = [
     "Gratitude Pay",
     "Other"
 ];
+
+export const  formatName = (name) => {
+    return name
+        .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+        .split(' ') // Split into words
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize first letter
+        .join(' '); // Join back with a single space
+}

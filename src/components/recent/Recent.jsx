@@ -19,7 +19,7 @@ export default function Recent({item, txnToDeleted, delMdl}) {
               {
                 item?.name ? <p>{item?.name}</p> : null
               }
-               <p>{new Date(item?.createdAt).toLocaleString()}</p>
+              <p>{(new Date(item?.createdAt).toLocaleString()).split(",")[0]}</p>
           </div>
         </div>
         <div className={delMdl ? "hide" : "recents-delete"}>

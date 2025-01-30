@@ -34,6 +34,9 @@
   bottom: 1rem;
   left: 1rem;
 }
+.home_addBtn div p{
+  cursor: pointer;
+}
 
 .btn_show{
   position: absolute;

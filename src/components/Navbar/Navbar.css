@@ -17,9 +17,11 @@
     font-size: 1.6rem;
 }
 .navbar img{
-    width: 2rem;
-    border-radius: 50%;
+    width: 2.3rem;
+    border-radius: 20%;
     cursor: pointer;
+    /* border: 1px solid gray; */
+    /* background-color: #fff; */
 }
 .navbar-opts{
     /* display: block; */

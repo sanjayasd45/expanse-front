@@ -7,6 +7,7 @@ import { addItem } from "../../Store/slices/getRecentData.slice";
 import { toast } from "react-toastify";
 import { namelist } from "../../helper/listdata";
 import { Loader } from "../../components/Sudo components/Loader";
+import { formatName } from "../../helper/helper.cac";
 
 // import { addTxn } from "../../Store/slices/getRecentData.slice";
 
@@ -36,17 +37,18 @@ export default function AddAmount({ setIsOpenAmt }) {
   };
   
 
-  const formData = {
-    email: user.email,
-    amount: amt,
-    Tag: opt,
-    name: name,
-    note: note,
-    deduction: false,
-  };
   const handleSubmit = async(e) => {
     e.preventDefault();
     setLoading(true)
+    // setName(formatName(name))
+    const formData = {
+      email: user.email,
+      amount: amt,
+      Tag: opt,
+      name: name,
+      note: note,
+      deduction: false,
+    };
     
     if(formData.Tag === "" || formData.Tag === "Select"){
       toast.warn("Please Select a Tag", {
@@ -124,7 +126,7 @@ export default function AddAmount({ setIsOpenAmt }) {
               name="name"
               placeholder="Name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(formatName(e.target.value))}
             ></input>
           </div>
         ) : null}

@@ -136,7 +136,7 @@ console.log(  typeof(udhariCalc("Ajad")));
                         <li>Note - {ele.note}</li>
                         <li>Name - {ele.name}</li>
                         <li>Name - ₹ {ele.amount}</li>
-                        <li>Date - {ele.createdAt}</li>
+                        <li>Date - {(new Date(ele?.createdAt).toLocaleString()).split(",")[0]}</li>
                       </ul>
                     </div>
                   )

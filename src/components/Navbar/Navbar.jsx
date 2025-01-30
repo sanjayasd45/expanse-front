@@ -1,10 +1,10 @@
 import "./Navbar.css";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FaRegCircleUser } from "react-icons/fa6";
 import { AiOutlineLogout } from "react-icons/ai";
 import { RiLoginCircleLine } from "react-icons/ri";
 import { resetStore } from "../../Store/store";
+import logo from "../../assets/img/logo.png"
 
 
 export default function Navbar() {
@@ -37,7 +37,7 @@ export default function Navbar() {
   return (
     <div className="navbar">
       <div>
-        <NavLink to={"/dashboard"}>{user.picture ? <img src={user.picture}alt="profile pic" onClick={handleClick}></img> :  <FaRegCircleUser />}</NavLink>        
+        <NavLink to={"/dashboard"}>{user.picture ? <img src={user.picture}alt="profile pic" onClick={handleClick}></img> :  <img src={logo} alt="logo"></img>}</NavLink>        
         <NavLink to={"/auth"}>
           {user.name != "" || undefined ? (
             <NavLink to={"/"}>

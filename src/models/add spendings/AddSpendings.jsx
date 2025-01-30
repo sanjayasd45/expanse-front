@@ -9,15 +9,16 @@ import { evaluateExpression, spendingList } from "../../helper/helper.cac";
 import { toast } from "react-toastify";
 import { namelist } from "../../helper/listdata";
 import { Loader } from "../../components/Sudo components/Loader";
+import { formatName } from "../../helper/helper.cac";
 
 export default function AddSpendings({ setIsSpending }) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const email = useSelector((state) => state.user).email;
   const [Tag, setTag] = useState("");
+  const [name, setName] = useState("")
   const [data, setData] = useState({
     amount: "",
-    name: "",
     note: "",
   });
 
@@ -69,7 +70,7 @@ export default function AddSpendings({ setIsSpending }) {
         return;
       }
   
-      if (nameCondition(Tag) && data.name === "") {
+      if (nameCondition(Tag) && name === "") {
         toast.warn("Please Enter Name", { theme: "colored" });
         setLoading(false);
         return;
@@ -152,8 +153,8 @@ export default function AddSpendings({ setIsSpending }) {
             <input
               name="name"
               placeholder="Name"
-              value={data.name}
-              onChange={handleChange}
+              value={name}
+              onChange={(e) => setName(formatName(e.target.value))}
             ></input>
           </div>
         ) : null}
