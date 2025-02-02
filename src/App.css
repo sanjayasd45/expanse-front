@@ -4,8 +4,15 @@
     box-sizing:  border-box;
     color: blanchedalmond;
 }
+.nothing{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
 .hide{
-    display: none;
+    display: none !important;
 }
 body{
     overflow: hidden;

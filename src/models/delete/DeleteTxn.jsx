@@ -2,7 +2,7 @@ import Recent from '../../components/recent/Recent';
 import './DeleteTxn.css'
 import { deleteTxn } from '../../Apis/delete.apis';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteItemById } from '../../Store/slices/getRecentData.slice';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
@@ -10,14 +10,12 @@ import { Loader } from '../../components/Sudo components/Loader';
 
 export default function DeleteTxn({txnToDelete, setDelMdl, delMdl}) {
   const dispatch = useDispatch()
-  const data = useSelector(state => state.getRecentData)
+  // const data = useSelector(state => state.getRecentData)
   const [loading, setLoading] = useState(false)
-  console.log(data);
-  
+
   const handleConfirm = async()=> {
-    setLoading(true)
     try {
-      setTimeout(() => {
+        setLoading(true)
         deleteTxn({ _id: txnToDelete._id });
         dispatch(deleteItemById(txnToDelete._id))
         setDelMdl(false);
@@ -25,7 +23,6 @@ export default function DeleteTxn({txnToDelete, setDelMdl, delMdl}) {
           theme: "colored",
         })
         setLoading(false)
-      }, 2000)
     } catch (error) {
       console.error("Error in handleConfirm:", error);
       toast.error("Error While Deleting!",{

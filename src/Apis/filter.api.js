@@ -130,3 +130,20 @@ export const searchByTags = async(data) => {
         console.log(err);
     }
 }
+export const optNames = async(data) => {  
+    // const {email, tag} = data
+    
+    try{
+        const responce = await axios.post(`${baseUrl}/filter/opt-names` , {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body : data
+        })
+        const data1 = await responce.data
+        console.log(data1);
+        return data1
+    }catch(err){
+        console.log(err);
+    }
+}

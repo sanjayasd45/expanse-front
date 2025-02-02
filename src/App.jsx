@@ -23,7 +23,7 @@ function App() {
       console.log(data.user);
       dispatch(setUser(value))
       
-      console.log("from frotend", data.user);
+      // console.log("from frotend", data.user);
     } catch (e) {
       console.log(e.message);
     }

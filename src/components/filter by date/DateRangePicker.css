@@ -7,26 +7,16 @@ input {
 input svg {
     color: antiquewhite;
 }
-.date-range-picker{
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-}
-.drp_head{
-    place-items: center;
-}
+
 .drp_main {
-    width: calc(100% - 1.5rem);
-    height: calc(100vh - 6rem);
     overflow: auto;
-    background: rgb(0, 0, 0);
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.7903536414565826) 0%, rgba(67, 9, 121, 0.8239670868347339) 35%, rgba(0, 31, 255, 0.17690826330532217) 100%);
-    margin-top: 1rem;
     border-radius: 5px;
     display: flex;
-    margin-left: 0.7rem;
+    /* margin-left: 0.7rem; */
+    align-items: center;
     flex-direction: column;
     gap: 0.3rem;
+    width: 100%;
 }
 
 .drp_search form{
@@ -34,22 +24,57 @@ input svg {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-top: 1rem;
     gap: 2rem;
+}
+.range-data-key {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100% - 2rem);
+  background-color: #04040e9c;
+  padding: 0.4rem 1rem 0.4rem 0rem;
+  border-radius: 0.5rem;
+
 }
 .drp_search form div{
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    justify-content: center;
 }
 .drp_search_btn{
     margin-bottom: 1rem;
     margin-left: 1rem;
 }
-
-.home_recents-items1 {
-    margin: 0 0.5rem 0.5rem 0.5rem;
+.range-data{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
 }
+.drp_txn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.3rem;
+}
+.recnts-data{
+  display: flex;
+  width: 100%;
+  margin: 0 1rem 0 1rem;
+}
+.recents-tags{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.recents-tags div{
+  display: flex;
+  gap: 0.1rem;
+}
+
 /* switch css */
 .switch {
     position: relative;
@@ -114,21 +139,23 @@ input svg {
   }
 /* switch css */
 
-.range-data{
+/* .range-data{
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
   margin: 1rem 2rem 1rem 2rem;
+  height: 100%;
 }
 .range-data-key{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
   font-size: 1.2rem;
   background-color: #04040e9c;
   padding: 0.4rem 0.7rem 0.4rem 0.7rem;
   border-radius: 0.5rem;
-}
+} */
 
 @media (max-width : 426px) {
     h1 {
@@ -136,8 +163,9 @@ input svg {
     }
     .drp_search form{
         /* flex-direction: column; */
-        display: grid;
-        grid-template-columns: repeat(2, auto); /* Two auto-sized columns */
+        display: flex;
+        flex-direction: column;
+
         justify-content: center;
         gap: 0rem;
         font-size: small;
@@ -172,6 +200,16 @@ input svg {
     .range-data-key{
       font-size: 1rem;
 
+    }
+
+    .drp_serach_input div{
+      font-size: 0.9rem;
+    }
+    .drp_btn div span {
+      font-size: 0.8rem;
+    }
+    .drp_search_btn{
+      font-size: 0.7rem;
     }
       
 }

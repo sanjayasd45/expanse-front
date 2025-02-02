@@ -2,7 +2,7 @@ import { useState } from "react";
 import './SerchByTags.css'
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { spendingList } from "../../helper/helper.cac";
+import { getToday, spendingList } from "../../helper/helper.cac";
 import { namelist } from "../../helper/listdata";
 import { searchByTags } from "../../Apis/filter.api";
 import Recent from "../recent/Recent";
@@ -10,9 +10,8 @@ import Recent from "../recent/Recent";
 export default function SerchByTags() {
     const user = useSelector((state) => state.user);
     const minimumDate = new Date(user.createdAt);
-    const today = new Date();
     let minDate = minimumDate.toISOString().split("T")[0];
-    let maxDate = today.toISOString().split("T")[0];
+    let maxDate = getToday()
       const [date, setDate] = useState({
         startDate: "",
         endDate: new Date(),
@@ -55,37 +54,38 @@ export default function SerchByTags() {
   }; 
   return (
     <div className="sbt">
-        <h1>Filter By Tags</h1>
-        <div className="udhari-content">
+        <div className="sbt-content">
           <div className="drp_search">
             <form onSubmit={handlesubmit}>
-              <div>
-                <label htmlFor="start-date">From :</label>
-                <input
-                  name="startDate"
-                  id="start-date"
-                  placeholder="dd/mm/yyyy"
-                  onChange={handleDateChange}
-                  type="date"
-                  value={date.startDate}
-                  min={minDate}
-                  max={maxDate}
-                />
+              <div className="drp-input">
+                <div>
+                  <label htmlFor="start-date">From :</label>
+                  <input
+                    name="startDate"
+                    id="start-date"
+                    placeholder="dd/mm/yyyy"
+                    onChange={handleDateChange}
+                    type="date"
+                    value={date.startDate}
+                    min={minDate}
+                    max={maxDate}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="End Date">To :</label>
+                  <input
+                    name="endDate"
+                    id="end-date"
+                    value={date.endDate}
+                    placeholder="dd/mm/yyyy"
+                    onChange={handleDateChange}
+                    type="date"
+                    min={minDate}
+                    max={maxDate}
+                  />
+                </div>
               </div>
-              <div>
-                <label htmlFor="End Date">To :</label>
-                <input
-                  name="endDate"
-                  id="end-date"
-                  value={date.endDate}
-                  placeholder="dd/mm/yyyy"
-                  onChange={handleDateChange}
-                  type="date"
-                  min={minDate}
-                  max={maxDate}
-                />
-              </div>
-              <div className="drp_btn">
+              <div className="sbt_select">
                 <div>
                   <label htmlFor="tag">Select Tag</label>
                   <select className="add_amount-opt" name='Tag' onChange={(e) => setTag(e.target.value)}>

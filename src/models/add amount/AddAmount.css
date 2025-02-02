@@ -41,12 +41,22 @@
     background-color: rgba(71, 114, 255, 0.692);
     border-radius: 5px;
     padding: 0.4rem;
+    cursor: pointer;
     width: fit-content;
 }
 .add_amount-bnts{
     display: flex;
     justify-content: space-between;
 }
+.opt_names{
+    all: unset;
+    background-color: rgba(71, 114, 255, 0.692);
+    border-radius: 5px;
+    padding: 0.4rem;
+    width: fit-content;
+    cursor: pointer;
+}
+
 
 @media (max-width: 426px){
     .add_amount{

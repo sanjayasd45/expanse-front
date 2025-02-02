@@ -1,5 +1,5 @@
 import "./AddSpendings.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "../add amount/AddAmount.css";
 import { AddSpending } from "../../Apis/spending";
@@ -10,9 +10,12 @@ import { toast } from "react-toastify";
 import { namelist } from "../../helper/listdata";
 import { Loader } from "../../components/Sudo components/Loader";
 import { formatName } from "../../helper/helper.cac";
+import { optNames } from "../../Apis/filter.api";
 
 export default function AddSpendings({ setIsSpending }) {
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.user);
+  const [lendNames, setLendNames] = useState(null);
   const dispatch = useDispatch();
   const email = useSelector((state) => state.user).email;
   const [Tag, setTag] = useState("");
@@ -85,14 +88,15 @@ export default function AddSpendings({ setIsSpending }) {
       // Data processing
       const amountf = evaluateExpression(data.amount);
       const dataToAdd = await AddSpending({
-        name: data.name,
+        name: name,
         note: data.note,
         amount: amountf,
         email,
         Tag,
         deduction: true,
       });
-  
+      console.log(data);
+      
       setData({
         amount: "",
         name: "",
@@ -108,11 +112,19 @@ export default function AddSpendings({ setIsSpending }) {
       setLoading(false); // Ensure loading state is turned off on error
     }
   };
-  
+    useEffect(() => {
+      const foo = async () => {
+        const lendNames1 = await optNames({email : user.email, tag : "Borrow"});
+        setLendNames(lendNames1);
+      };
+      foo();
+    }, []);
+  const handleNameChange = (e) => {
+    setName(formatName(e.target.value))
+  }
 
   return (
     <div className="add_amount">
-      {/* {loading ? <Loader /> : ""} */}
       {loading ? (
         <div>
           <Loader />
@@ -144,17 +156,31 @@ export default function AddSpendings({ setIsSpending }) {
             ))}
           </select>
         </div>
+
+        {Tag === "Repay Loan" ? (
+          <div>
+            <label htmlFor="name">Select Name</label>
+            <select id="name" name="name" className="opt_names" onChange={handleNameChange}>
+              <option value="select">Select Name</option>
+              {
+                lendNames.map((ele) => (
+                  <option value={ele} key={ele.index}>{ele}</option>
+                ))
+              }
+            </select>
+          </div>
+        ) : null}
+
         {Tag === "Borrow" ||
         Tag === "Lend" ||
-        Tag === "Gratitude Pay" ||
-        Tag === "Repay Loan" ? (
+        Tag === "Gratitude Pay" ? (
           <div>
             <label htmlFor="name">Enter Name</label>
             <input
               name="name"
               placeholder="Name"
               value={name}
-              onChange={(e) => setName(formatName(e.target.value))}
+              onChange={handleNameChange}
             ></input>
           </div>
         ) : null}

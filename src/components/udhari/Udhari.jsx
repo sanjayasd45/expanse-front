@@ -3,14 +3,13 @@ import "./Udhari.css";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { serachUdhari } from "../../Apis/filter.api";
+import { getToday } from "../../helper/helper.cac";
 
 export default function Udhari() {
   const user = useSelector((state) => state.user);
   const minimumDate = new Date(user.createdAt);
-  const today = new Date();
   let minDate = minimumDate.toISOString().split("T")[0];
-  let maxDate = today.toISOString().split("T")[0];
-
+  let maxDate = getToday()
   const [isChecked, setIsChecked] = useState(false);
   const [udhariData, setUdhariData] = useState(null);
   const [nameList, setNameList] = useState(null);
@@ -102,6 +101,7 @@ console.log(  typeof(udhariCalc("Ajad")));
                 type="date"
                 min={minDate}
                 max={maxDate}
+                // yyyy-mm-dd
               />
             </div>
             <div className="drp_btn">

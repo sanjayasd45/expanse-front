@@ -11,6 +11,10 @@
     border-radius: 0.3rem;
 
 }
+/* .recents-tags{
+    display: flex;
+    flex-direction: column;
+} */
 .recents-tags div{
     display: inline-flex;
     gap: 1rem;

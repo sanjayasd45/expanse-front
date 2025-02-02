@@ -57,3 +57,11 @@ export const  formatName = (name) => {
         .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize first letter
         .join(' '); // Join back with a single space
 }
+export const  getToday = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(date.getDate()).padStart(2, '0'); // Ensures 2 digits
+    const localDate = `${year}-${month}-${day}`;
+    return localDate
+}
