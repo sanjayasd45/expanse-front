@@ -113,10 +113,13 @@ export default function AddSpendings({ setIsSpending }) {
     }
   };
     useEffect(() => {
+      const data = {email : user.email, tag : "Borrow"}
       const foo = async () => {
-        const lendNames1 = await optNames({email : user.email, tag : "Borrow"});
+        const lendNames1 = await optNames(data);
         setLendNames(lendNames1);
+        console.log("lendNames1", lendNames1);
       };
+      console.log(data);
       foo();
     }, []);
   const handleNameChange = (e) => {
