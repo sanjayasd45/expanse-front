@@ -163,8 +163,8 @@ export default function AddSpendings({ setIsSpending }) {
             <select id="name" name="name" className="opt_names" onChange={handleNameChange}>
               <option value="select">Select Name</option>
               {
-                lendNames.map((ele) => (
-                  <option value={ele} key={ele.index}>{ele}</option>
+                lendNames?.map((ele) => (
+                  <option value={ele} key={ele?.index}>{ele}</option>
                 ))
               }
             </select>
