@@ -59,11 +59,12 @@ input svg {
   flex-direction: column;
   width: 100%;
   gap: 0.3rem;
+  padding: 0 1rem 0 1rem;
 }
 .recnts-data{
   display: flex;
   width: 100%;
-  margin: 0 1rem 0 1rem;
+  /* margin: 0 1rem 0 1rem; */
 }
 .recents-tags{
   display: flex;

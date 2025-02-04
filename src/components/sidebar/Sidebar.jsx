@@ -4,6 +4,7 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { MdOutlineSummarize, MdSummarize } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { IoMdClose } from "react-icons/io";
+import PropTypes from 'prop-types';
 
 
 export default function Sidebar({menu, setMenu, handleSidebarChange}) {
@@ -28,3 +29,9 @@ export default function Sidebar({menu, setMenu, handleSidebarChange}) {
     </div>
   )
 }
+
+Sidebar.propTypes = {
+  menu: PropTypes.array.isRequired,
+  setMenu: PropTypes.func.isRequired,
+  handleSidebarChange: PropTypes.func.isRequired,
+};

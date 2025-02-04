@@ -130,7 +130,7 @@ console.log(  typeof(udhariCalc("Ajad")));
               <div>
                 {
                   udhariDataFinder(item)?.map((ele) => 
-                    <div className="udhari-data-items" key={ele.index}>
+                    <div className="udhari-data-items" key={ele?.index}>
                       <ul>
                         <li>{ele.Tag}</li>
                         <li>Note - {ele.note}</li>
