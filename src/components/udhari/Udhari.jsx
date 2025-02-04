@@ -125,7 +125,7 @@ console.log(  typeof(udhariCalc("Ajad")));
         </div>
         <div className="udhari-data">
           {nameList?.map((item) => (
-            <details key={item.index}>
+            <details key={item?.index}>
               <summary>{item}</summary>
               <div>
                 {
