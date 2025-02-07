@@ -7,36 +7,49 @@ import AddAmount from "../../models/add amount/AddAmount";
 import AddSpendings from "../../models/add spendings/AddSpendings";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecentData } from "../../Store/slices/getRecentData.slice";
-import { useTodaysTS } from "../../helper/helper.cac";
+// import { useTodaysTS } from "../../helper/helper.cac";
 import { useNavigate } from "react-router-dom";
 import DeleteTxn from "../../models/delete/DeleteTxn";
 import { IoOpenOutline } from "react-icons/io5";
+import { FaAnglesLeft, FaAnglesRight  } from "react-icons/fa6";
+
 
 
 export default function Home() {
   const navigate = useNavigate()
+  const recentData = useSelector((state) => state.getRecentData.list);
   const email = useSelector((state) => state.user).email;
   const [isOpenAmt, setIsOpenAmt] = useState(false);
   const [isSpending, setIsSpending] = useState(false);
   const [txnToDelete, setTxnToDelete] = useState(null)
   const [delMdl, setDelMdl] = useState(false)
   const [showBtn, setShowBtn] = useState(false)
-
-  const topData = useTodaysTS();
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(10)
 
   const dispatch = useDispatch();
+  const onchangeLimit = (e) => {
+    setLimit(e.target.value);
+    if(page > e.target.value){
+      setPage(e.target.value)
+    }
+  }
+
+  const recentDataList= recentData?.data;
 
   useEffect(() => {
-    if(window.scrollY){
-      console.log("scrolled");
-    }
+    
     if (email !== "") {
-      dispatch(getRecentData({ email }));
+      const cPage = Math.ceil(recentData?.totalDocs / limit);
+      console.log("resq", cPage);
+      if (page > cPage) {
+        setPage(cPage);
+        dispatch(getRecentData({ email, page : cPage, limit }));
+      }else{
+        dispatch(getRecentData({ email, page, limit }));
+      }
     }
-  }, [email]);
-  const recentData = useSelector((state) => state.getRecentData);
-  const recentDataList = recentData?.list?.response;
-  console.log(recentDataList);
+  }, [email, page, limit]);
 
   function handleAuth() {
     navigate("/auth")
@@ -51,28 +64,40 @@ export default function Home() {
 
   return (
     <div className="home">
-
-      
       <Navbar />
       {email !== "" ? (
         <div className="home_recents">
-          <div className="home_recents-total">
-            <h3>
-                  Total Transactions ₹{topData.totalAmount}
-            </h3>
-            {
-              topData?.topCategory?.amount && topData?.topCategory?.amount > 0 ? (
-                <>
-                  <p>Top </p>
-                  <p>
-                    {topData?.topCategory?.Tag} ₹
-                    {topData?.topCategory?.amount}
-                  </p>
-                </>
-              ) : (
-                <p></p>
-              )
-            }
+          <div className="home_recents-top">
+            <div className="home_recents-top-limit">
+              <label htmlFor="limit" >Limit</label>
+              <select 
+                className="add_amount-opt"
+                name="limit"
+                id="limit"
+                value={limit}
+                onChange={onchangeLimit}
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={15}>15</option>
+                <option value={recentData?.totalDocs}>All</option>
+              </select>
+            </div>
+            <div className="home_recents-top-page">
+              <button
+                onClick={() => setPage(page - 1)}
+                disabled={page === 1}
+              >
+                <FaAnglesLeft />
+              </button>
+              <span>{`${page} of ${recentData?.totalPages}`}</span>
+              <button
+                onClick={() => setPage(page + 1)}
+                disabled={page === recentData?.totalPages}
+              >
+                <FaAnglesRight />
+              </button>
+            </div>
           </div>
           <div className="home_recents-items">
             <h3>{`Transactions`}</h3>

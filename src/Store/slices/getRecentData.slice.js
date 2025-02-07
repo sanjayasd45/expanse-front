@@ -15,6 +15,8 @@ export const getRecentData = createAsyncThunk(
         body: opt,
       });
       const data = await response;
+      console.log(data.data);
+      
       return data.data;
     } catch (err) {
       console.log(err);
@@ -33,17 +35,19 @@ const slice = createSlice({
     deleteItemById: (state, action) => {
       const idToDelete = action.payload; // The _id of the item to delete
       console.log(action.payload);
-      state.list.response = state.list.response.filter((item) => (
-        console.log(item),
+      state.list.data = state.list.data.filter((item) => (
         item._id !== idToDelete
       ));
     },
     addItem: (state, action) => {
       // Check if the action.payload is the correct format (an object)
-      if (action.payload && typeof action.payload === 'object') {
-        state.list.response.push(action.payload);
-      } else {
-        console.error("Invalid item format:", action.payload);
+      if(state.list.currentPage === 1){
+        
+        if (action.payload && typeof action.payload === 'object') {
+          state.list.data.unshift(action.payload);
+        } else {
+          console.error("Invalid item format:", action.payload);
+        }
       }
     },
   },

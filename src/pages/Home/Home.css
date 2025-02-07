@@ -13,7 +13,24 @@
   border-radius: 8px;
   padding: 0.5rem;
 }
+.home_recents-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 1.5rem;
 
+}
+.home_recents-top-limit label{
+  margin-right: 0.5rem;
+}
+.home_recents-top-page span{
+  margin: 0 0.5rem;
+}
+.home_recents-top-page button{
+  display: inline-flex;
+  align-items: center;
+}
 .home_recents-items {
   width: calc(100% - 4%);
   height: calc(100vh - 11.6rem);
