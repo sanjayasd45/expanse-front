@@ -41,9 +41,10 @@
     margin-left: 1rem;
 }
 .dashboard-c-s-b{
-    margin-top: 1rem;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    margin: 1.5rem;
+}
+.dashboard-tags:last-child{
+    margin-bottom: 1rem;
 }
 .dashboard-c-s-t{
     margin: 1rem 1.5rem 1rem 1.5rem;

@@ -30,7 +30,7 @@ button{
     background-color: rgba(30, 30, 255, 0.589);
     width: fit-content;
     font-size: 0.9rem;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     font-weight: 600;
     cursor: pointer;
 }
