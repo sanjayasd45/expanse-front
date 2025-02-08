@@ -7,6 +7,7 @@ import { useState } from "react";
 import DateRangePicker from "../../components/filter by date/DateRangePicker";
 import Udhari from "../../components/udhari/Udhari";
 import SerchByTags from "../../components/serach by tags/SerchByTags";
+import Profile from "../../components/profile/Profile";
 
 export default function Dashboard() {
   
@@ -38,10 +39,12 @@ export default function Dashboard() {
       </div>
       <div className="ds_main">
         {
-          side === "Summary" ?  <Filter /> : (
-            side === "Filter By Date" ? <DateRangePicker/> : (
-              side === "Udhari Summary" ? <Udhari/> : (
-                side === "Filter By Tags" ? <SerchByTags/> : <Filter/>
+          side === "Profile" ? <Profile /> : (  
+            side === "Summary" ?  <Filter /> : (
+              side === "Filter By Date" ? <DateRangePicker/> : (
+                side === "Udhari Summary" ? <Udhari/> : (
+                  side === "Filter By Tags" ? <SerchByTags/> : <Filter/>
+                )
               )
             )
           )

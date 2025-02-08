@@ -7,6 +7,7 @@ import { Loader } from "../Sudo components/Loader";
 import DateRangePicker from "../filter by date/DateRangePicker";
 import SerchByTags from "../serach by tags/SerchByTags";
 import Udhari from "../udhari/Udhari" 
+// import HandlePrint from "../handlePrint/HandlePrint";
 
 export default function Dashboard() {
   const [loading, setLoading] = useState()
@@ -61,6 +62,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard-c">
+        {/* <HandlePrint/> */}
         <div className="dashboard_btns">
           <h1>Filter By Range</h1>
           {/* <button>Add remote users</button> */}

@@ -1,6 +1,10 @@
 .sidebar{
     width: 100%;
 }
+.sidebar_btns a{
+    text-decoration: none;
+    color: white;
+}
 .sidebar_content{
     display: flex;
     flex-direction: column;

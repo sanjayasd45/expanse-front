@@ -140,7 +140,7 @@ export default function AddSpendings({ setIsSpending }) {
             <label htmlFor="amount">Enter Amount</label>
             <input
               name="amount"
-              placeholder="₹1000"
+              placeholder="₹"
               value={data.amount}
               onChange={handleChange}
             ></input>

@@ -106,7 +106,7 @@ export default function AddAmount({ setIsOpenAmt }) {
           <label htmlFor="amount">Enter Amount</label>
           <input
             name="amount"
-            placeholder="1000"
+            placeholder="₹"
             value={amt}
             onChange={handleChange}
           ></input>

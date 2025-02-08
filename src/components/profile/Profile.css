@@ -1,0 +1,26 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+}
+.profileHeader{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    border: 1px solid #2a2a2a;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #1e1e1e;
+}
+.profileHeader img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+}
+.profileInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
