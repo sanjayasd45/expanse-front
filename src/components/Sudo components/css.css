@@ -40,3 +40,8 @@
     60%,100% {transform: rotate(90deg)}
   }
 /* HTML: <div class="loader"></div> */
+
+.drp_serach_input{
+  display: inline-flex;
+  gap: 1rem;
+}
