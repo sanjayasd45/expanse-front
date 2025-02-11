@@ -45,3 +45,12 @@
   display: inline-flex;
   gap: 1rem;
 }
+
+.roomRent form div{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.roomRent form div input{
+  padding: 3px;
+}

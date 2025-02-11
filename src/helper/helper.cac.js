@@ -1,5 +1,7 @@
+import "jspdf-autotable";
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import jsPDF from 'jspdf';
 
 export const useTodaysTS = () => {
     const recentData = useSelector(state => state?.getRecentData?.list?.response);
@@ -65,3 +67,58 @@ export const  getToday = () => {
     const localDate = `${year}-${month}-${day}`;
     return localDate
 }
+
+
+export const generatePDF = ((transactions, name, email,selectedDate) => {
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
+    let y = 20; // Initial vertical position
+    // Title
+    doc.setFontSize(18);
+    doc.text("Transactions", 10, y);
+    y += 10;
+
+    const formatDate = (date) => {
+        return new Date(date).toLocaleDateString("en-GB"); // "en-GB" uses dd/mm/yyyy format
+    };
+
+    // User details
+    doc.setFontSize(12);
+    doc.text(`Name: ${name || "N/A"}`, 10, y);
+    y += 8;
+    doc.text(`Email: ${email || "N/A"}`, 10, y);
+    y += 8;
+    doc.text(`Date: ${formatDate(new Date())}`, 10, y);
+    y += 8;
+    doc.text(`Range: ${formatDate(selectedDate?.startDate)} to ${formatDate(selectedDate?.endDate)}`, 10, y);
+    y += 8;
+
+    y += 4; // Space before the table
+
+    // Table Headers
+    const tableColumn = ["Date", "Note", "Tag", "Name", "Amount (INR)"];
+
+    // Table Rows
+    const tableRows = transactions.map((txn) => [
+      formatDate(txn.createdAt), // Format date
+      txn.note || "N/A", // Note
+      txn.Tag || "N/A", // Tag
+      txn.name || "N/A", // Name
+      `${txn.amount}`, // Format amount
+    ]);
+
+    // Add table with autoTable
+    doc.autoTable({
+      startY: y,
+      head: [tableColumn],
+      body: tableRows,
+      theme: "striped",
+      styles: { fontSize: 10, cellPadding: 3 },
+      headStyles: { fillColor: [22, 160, 133], textColor: 255 },
+      alternateRowStyles: { fillColor: [240, 240, 240] },
+      margin: { top: 10 },
+    });
+
+    // Save the PDF
+    doc.save("transaction_statement.pdf");
+});
+
