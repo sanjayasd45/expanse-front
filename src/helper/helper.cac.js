@@ -95,7 +95,7 @@ export const generatePDF = ((transactions, name, email,selectedDate) => {
     y += 4; // Space before the table
 
     // Table Headers
-    const tableColumn = ["Date", "Note", "Tag", "Name", "Amount (INR)"];
+    const tableColumn = ["Date", "Note", "Tag", "Name", "Amount (INR)", "Balance (INR)"];
 
     // Table Rows
     const tableRows = transactions.map((txn) => [
@@ -103,7 +103,8 @@ export const generatePDF = ((transactions, name, email,selectedDate) => {
       txn.note || "N/A", // Note
       txn.Tag || "N/A", // Tag
       txn.name || "N/A", // Name
-      `${txn.amount}`, // Format amount
+      `${txn.amount}`, // Format amount,
+      txn.runningBalance || 0, // Running balance
     ]);
 
     // Add table with autoTable

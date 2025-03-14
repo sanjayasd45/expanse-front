@@ -31,6 +31,8 @@ export default function Profile() {
       }
       const data = {...selectedDate,isChecked : true, email : user.email}
       const result = await dateByRange(data)
+      console.log(result);
+      
       setShowForm(false)
       //  generating statement pdf 
       generatePDF(result?.data, user?.name, user?.email, selectedDate)

@@ -17,6 +17,8 @@ export const alltimeData = async({email}) => {
             body : email
         })
         const data = await responce.data
+        console.log(data);
+        
         data?.map((e) => {
             totalSum = totalSum + e.sum
             if(e.deduction){
