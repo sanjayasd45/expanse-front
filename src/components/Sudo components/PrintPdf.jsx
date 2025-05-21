@@ -3,6 +3,7 @@ import "jspdf-autotable";
 import { useSelector } from "react-redux";
 
 const TransactionPDF = ({ transactions }) => {
+  console.log("transactions", transactions);
 
   const user = useSelector((state) => state.user);
   const handlePrintPDF = () => {
@@ -16,14 +17,13 @@ const TransactionPDF = ({ transactions }) => {
 
     // Check if transactions exist
     //   const { email, name } = transactions[0]; // Extract user details from first transaction
-      doc.setFontSize(12);
-      doc.text(`Name: ${user?.name}`, 10, y);
-      y += 8;
-      doc.text(`Email: ${user?.email}`, 10, y);
-      y += 8;
-      doc.text(`Date: ${new Date().toLocaleDateString()}`, 10, y);
-      y += 8;
-
+    doc.setFontSize(12);
+    doc.text(`Name: ${user?.name}`, 10, y);
+    y += 8;
+    doc.text(`Email: ${user?.email}`, 10, y);
+    y += 8;
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 10, y);
+    y += 8;
 
     y += 4; // Space before the table
 
@@ -38,7 +38,6 @@ const TransactionPDF = ({ transactions }) => {
       txn.name || "N/A", // Name
       `${txn.amount.toLocaleString()}`, // Format amount
     ]);
-
     // Add table with autoTable
     doc.autoTable({
       startY: y,
@@ -56,7 +55,10 @@ const TransactionPDF = ({ transactions }) => {
   };
 
   return (
-    <button onClick={handlePrintPDF} style={{ padding: "10px 15px", fontSize: "16px", cursor: "pointer" }}>
+    <button
+      onClick={handlePrintPDF}
+      style={{ padding: "10px 15px", fontSize: "16px", cursor: "pointer" }}
+    >
       Download Statement
     </button>
   );

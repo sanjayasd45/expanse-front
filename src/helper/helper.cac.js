@@ -126,7 +126,8 @@ export const generatePDF = ((transactions, name, email, selectedDate) => {
 });
 
 export const setFileToServer = async (file) => {
-     const rawData = await file.arrayBuffer();
+    // if(!file[0]) return null;
+     const rawData = await file?.arrayBuffer();
     try {
         const response = await axios.post(
             `${baseUrl}/helpers/cloudinary-signature`,
@@ -146,6 +147,7 @@ export const setFileToServer = async (file) => {
     }
 }
 export function getCloudinaryPublicId(url) {
+    if (!url) return null;
   try {
     const parts = new URL(url).pathname.split('/');
     

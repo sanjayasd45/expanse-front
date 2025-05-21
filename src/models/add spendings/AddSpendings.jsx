@@ -5,13 +5,17 @@ import "../add amount/AddAmount.css";
 import { AddSpending } from "../../Apis/spending";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../Store/slices/getRecentData.slice";
-import { evaluateExpression, setFileToServer, spendingList } from "../../helper/helper.cac";
+import {
+  evaluateExpression,
+  setFileToServer,
+  spendingList,
+} from "../../helper/helper.cac";
 import { toast } from "react-toastify";
 import { namelist } from "../../helper/listdata";
 import { Loader } from "../../components/Sudo components/Loader";
 import { formatName } from "../../helper/helper.cac";
 import { optNames } from "../../Apis/filter.api";
-import {getCloudinaryPublicId} from "../../helper/helper.cac"
+import { getCloudinaryPublicId } from "../../helper/helper.cac";
 
 export default function AddSpendings({ setIsSpending }) {
   const [loading, setLoading] = useState(false);
@@ -19,15 +23,17 @@ export default function AddSpendings({ setIsSpending }) {
   const [lendNames, setLendNames] = useState(null);
   const dispatch = useDispatch();
   const email = useSelector((state) => state.user).email;
+  const [fileUrl, setFileUrl] = useState("");
+  const [fileId, setFileId] = useState("");
   const [Tag, setTag] = useState("");
-  const [name, setName] = useState("")
-  const [file, setFile] = useState([]);
+  const [name, setName] = useState("");
+  const [file, setFile] = useState(null);
   const [data, setData] = useState({
     amount: "",
     note: "",
   });
 
-  const handleChange = async(event) => {
+  const handleChange = async (event) => {
     const regex = /^[0-9+*]+$/;
     const { name, value } = event.target;
     if (name === "file") {
@@ -64,8 +70,7 @@ export default function AddSpendings({ setIsSpending }) {
     e.preventDefault();
     setLoading(true); // Start loading when form submission starts.
     console.log("data", data);
-    
-  
+
     try {
       // Validation checks
       if (data.amount === "") {
@@ -73,28 +78,31 @@ export default function AddSpendings({ setIsSpending }) {
         setLoading(false); // Stop loading on validation failure
         return;
       }
-  
+
       if (Tag === "" || Tag === "Select") {
         toast.warn("Please Select Tag", { theme: "colored" });
         setLoading(false);
         return;
       }
-  
+
       if (nameCondition(Tag) && name === "") {
         toast.warn("Please Enter Name", { theme: "colored" });
         setLoading(false);
         return;
       }
-  
+
       if (data.note === "") {
         toast.warn("Please Enter Note", { theme: "colored" });
         setLoading(false);
         return;
       }
-      const fileUrl = await setFileToServer(file)
-      console.log("fileUrl", fileUrl);
+        console.log("file", file);
+        const fileUrl = await setFileToServer(file); // make sure this handles the upload correctly
+        setFileUrl(fileUrl);
+        const fileId = getCloudinaryPublicId(fileUrl); // parse the Cloudinary public ID
+        setFileId(fileId);
       
-      const fileId = getCloudinaryPublicId(fileUrl)
+      console.log("fileUrl", fileUrl);
       const amountf = evaluateExpression(data.amount);
       const dataToAdd = await AddSpending({
         name: name,
@@ -103,10 +111,10 @@ export default function AddSpendings({ setIsSpending }) {
         email,
         Tag,
         deduction: true,
-        fileId
+        fileId,
       });
-      console.log("dataToAdd ",dataToAdd);
-      
+      console.log("dataToAdd ", dataToAdd);
+
       setData({
         amount: "",
         name: "",
@@ -122,19 +130,19 @@ export default function AddSpendings({ setIsSpending }) {
       setLoading(false); // Ensure loading state is turned off on error
     }
   };
-    useEffect(() => {
-      const data = {email : user.email, tag : "Borrow"}
-      const foo = async () => {
-        const lendNames1 = await optNames(data);
-        setLendNames(lendNames1);
-        console.log("lendNames1", lendNames1);
-      };
-      console.log(data);
-      foo();
-    }, []);
+  useEffect(() => {
+    const data = { email: user.email, tag: "Borrow" };
+    const foo = async () => {
+      const lendNames1 = await optNames(data);
+      setLendNames(lendNames1);
+      console.log("lendNames1", lendNames1);
+    };
+    console.log(data);
+    foo();
+  }, []);
   const handleNameChange = (e) => {
-    setName(formatName(e.target.value))
-  }
+    setName(formatName(e.target.value));
+  };
 
   return (
     <div className="add_amount">
@@ -142,7 +150,9 @@ export default function AddSpendings({ setIsSpending }) {
         <div>
           <Loader />
         </div>
-      ) : ("")}
+      ) : (
+        ""
+      )}
 
       <form action="" className="add_amount-form" onSubmit={handleSubmit}>
         <div className="add_amount-amount">
@@ -173,20 +183,23 @@ export default function AddSpendings({ setIsSpending }) {
         {Tag === "Repay Loan" ? (
           <div>
             <label htmlFor="name">Select Name</label>
-            <select id="name" name="name" className="opt_names" onChange={handleNameChange}>
+            <select
+              id="name"
+              name="name"
+              className="opt_names"
+              onChange={handleNameChange}
+            >
               <option value="select">Select Name</option>
-              {
-                lendNames?.map((ele) => (
-                  <option value={ele} key={ele?.index}>{ele}</option>
-                ))
-              }
+              {lendNames?.map((ele) => (
+                <option value={ele} key={ele?.index}>
+                  {ele}
+                </option>
+              ))}
             </select>
           </div>
         ) : null}
 
-        {Tag === "Borrow" ||
-        Tag === "Lend" ||
-        Tag === "Gratitude Pay" ? (
+        {Tag === "Borrow" || Tag === "Lend" || Tag === "Gratitude Pay" ? (
           <div>
             <label htmlFor="name">Enter Name</label>
             <input
@@ -213,6 +226,7 @@ export default function AddSpendings({ setIsSpending }) {
             type="file"
             placeholder="Select File"
             onChange={handleChange}
+            accept="image/*"
           ></input>
         </div>
         <div className="spending-btns">
