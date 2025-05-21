@@ -36,6 +36,8 @@ export default function Home() {
   }
 
   const recentDataList= recentData?.data;
+  console.log("recentDataList", recentDataList);
+  
 
   useEffect(() => {
     

@@ -42,3 +42,10 @@
 .recents-delete span svg path {
     color: #ff5b52;
 }
+.recents-tag-note{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+}

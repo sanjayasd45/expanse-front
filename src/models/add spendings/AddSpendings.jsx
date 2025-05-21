@@ -5,12 +5,13 @@ import "../add amount/AddAmount.css";
 import { AddSpending } from "../../Apis/spending";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../Store/slices/getRecentData.slice";
-import { evaluateExpression, spendingList } from "../../helper/helper.cac";
+import { evaluateExpression, setFileToServer, spendingList } from "../../helper/helper.cac";
 import { toast } from "react-toastify";
 import { namelist } from "../../helper/listdata";
 import { Loader } from "../../components/Sudo components/Loader";
 import { formatName } from "../../helper/helper.cac";
 import { optNames } from "../../Apis/filter.api";
+import {getCloudinaryPublicId} from "../../helper/helper.cac"
 
 export default function AddSpendings({ setIsSpending }) {
   const [loading, setLoading] = useState(false);
@@ -20,15 +21,19 @@ export default function AddSpendings({ setIsSpending }) {
   const email = useSelector((state) => state.user).email;
   const [Tag, setTag] = useState("");
   const [name, setName] = useState("")
+  const [file, setFile] = useState([]);
   const [data, setData] = useState({
     amount: "",
     note: "",
   });
 
-  const handleChange = (event) => {
+  const handleChange = async(event) => {
     const regex = /^[0-9+*]+$/;
     const { name, value } = event.target;
-
+    if (name === "file") {
+      const file1 = event.target.files[0];
+      setFile(file1);
+    }
     setData((previous) => ({
       ...previous,
       [name]:
@@ -58,6 +63,8 @@ export default function AddSpendings({ setIsSpending }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loading when form submission starts.
+    console.log("data", data);
+    
   
     try {
       // Validation checks
@@ -84,8 +91,10 @@ export default function AddSpendings({ setIsSpending }) {
         setLoading(false);
         return;
       }
-  
-      // Data processing
+      const fileUrl = await setFileToServer(file)
+      console.log("fileUrl", fileUrl);
+      
+      const fileId = getCloudinaryPublicId(fileUrl)
       const amountf = evaluateExpression(data.amount);
       const dataToAdd = await AddSpending({
         name: name,
@@ -94,8 +103,9 @@ export default function AddSpendings({ setIsSpending }) {
         email,
         Tag,
         deduction: true,
+        fileId
       });
-      console.log(data);
+      console.log("dataToAdd ",dataToAdd);
       
       setData({
         amount: "",
@@ -193,6 +203,15 @@ export default function AddSpendings({ setIsSpending }) {
             name="note"
             placeholder="Note"
             value={data.note}
+            onChange={handleChange}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="file">Image URL</label>
+          <input
+            name="file"
+            type="file"
+            placeholder="Select File"
             onChange={handleChange}
           ></input>
         </div>

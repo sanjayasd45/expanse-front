@@ -2,8 +2,6 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
 export const AddSpending = async(formData) => {
-    console.log(formData);
-    
     try{
         const responce = await axios.post(`${baseUrl}/spending/add` , {
             method: 'POST',
@@ -19,6 +17,8 @@ export const AddSpending = async(formData) => {
         console.log(err);
     }
 }
+
+
 
 // export const DeleteSpending = async() => {
 //     const axios
