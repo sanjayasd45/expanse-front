@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GiCrossedBones } from "react-icons/gi";
 import { FaRegImage } from "react-icons/fa";
 
 
@@ -19,7 +20,7 @@ const ShowImage = ({publicId}) => {
       {isOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={closeModal}>×</button>
+            <button className="close-btn" onClick={closeModal}><GiCrossedBones /></button>
             <img src={imageUrl} alt="Cloudinary" className="modal-image" />
           </div>
         </div>
