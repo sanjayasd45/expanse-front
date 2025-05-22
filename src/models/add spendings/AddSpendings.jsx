@@ -1,5 +1,5 @@
 import "./AddSpendings.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import "../add amount/AddAmount.css";
 import { AddSpending } from "../../Apis/spending";
@@ -18,6 +18,7 @@ import { optNames } from "../../Apis/filter.api";
 import { getCloudinaryPublicId } from "../../helper/helper.cac";
 
 export default function AddSpendings({ setIsSpending }) {
+  const fileInputRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
   const [lendNames, setLendNames] = useState(null);
@@ -96,12 +97,12 @@ export default function AddSpendings({ setIsSpending }) {
         setLoading(false);
         return;
       }
-        console.log("file", file);
-        const fileUrl = await setFileToServer(file); // make sure this handles the upload correctly
-        setFileUrl(fileUrl);
-        const fileId = getCloudinaryPublicId(fileUrl); // parse the Cloudinary public ID
-        setFileId(fileId);
-      
+      console.log("file", file);
+      const fileUrl = await setFileToServer(file); // make sure this handles the upload correctly
+      setFileUrl(fileUrl);
+      const fileId = getCloudinaryPublicId(fileUrl); // parse the Cloudinary public ID
+      setFileId(fileId);
+
       console.log("fileUrl", fileUrl);
       const amountf = evaluateExpression(data.amount);
       const dataToAdd = await AddSpending({
@@ -120,6 +121,11 @@ export default function AddSpendings({ setIsSpending }) {
         name: "",
         note: "",
       });
+      const clearFile = () => {
+        setFile(null);
+        fileInputRef.current.value = ""; 
+      };
+      clearFile();
       dispatch(addItem(dataToAdd));
       toast.success("Added Successfully!", { theme: "colored" });
       setLoading(false);
@@ -143,7 +149,20 @@ export default function AddSpendings({ setIsSpending }) {
   const handleNameChange = (e) => {
     setName(formatName(e.target.value));
   };
-
+  const handleCancel = () => {
+    setIsSpending(false);
+    setData({
+      amount: "",
+      name: "",
+      note: "",
+    });
+    setName("");
+    const clearFile = () => {
+      setFile(null);
+      fileInputRef.current.value = ""; // only allowed way to clear input
+    };
+    clearFile();
+  };
   return (
     <div className="add_amount">
       {loading ? (
@@ -227,10 +246,12 @@ export default function AddSpendings({ setIsSpending }) {
             placeholder="Select File"
             onChange={handleChange}
             accept="image/*"
+            ref={fileInputRef}
+            // value={file?.file[0]?.name}
           ></input>
         </div>
         <div className="spending-btns">
-          <button type="button" onClick={() => setIsSpending(false)}>
+          <button type="button" onClick={handleCancel}>
             Cancel
           </button>
           <button type="submit">Add Spending</button>
