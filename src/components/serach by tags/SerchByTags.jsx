@@ -49,7 +49,7 @@ export default function SerchByTags() {
     console.log(data);
     const data1 = await searchByTags(data)
     setTagsData(data1)
-    console.log(data1);
+    console.log("data1", data1); 
     
   }; 
   return (

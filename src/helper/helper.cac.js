@@ -37,6 +37,8 @@ export const evaluateExpression = (expression) => {
 export const spendingList = [
     "Select",
     "Education",
+    "Electricity Bill",
+    "Mobile recharge",
     "Room Rent",
     "Credit Card Bill",
     "Vegetables",
