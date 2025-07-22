@@ -14,7 +14,9 @@ export const deleteTxn = async ({ _id }) => {
           },
         }
       );
+      // console.log(response.status);
       return response; 
+      
     } catch (err) {
       console.error("Error in deleteTxn:", err);
       throw err; 

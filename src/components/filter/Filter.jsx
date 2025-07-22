@@ -31,27 +31,27 @@ export default function Dashboard() {
       setOption(e.target.value)
       const data = await alltimeData(user);
       setData(data);
-      console.log(data);
+      // console.log(data);
     } else if (e.target.value === "To Day") {
       setOption(e.target.value)
       const data = await today(user);
       setData(data);
-      console.log(data);
+      // console.log(data);
     } else if (e.target.value === "Last Week") {
       setOption(e.target.value)
       const data = await fromRange({ email, duration: 7 });
       setData(data);
-      console.log(data);
+      // console.log(data);
     } else if (e.target.value === "Last Month") {
       setOption(e.target.value)
       const data = await fromRange({ email, duration: 30 });
       setData(data);
-      console.log(data);
+      // console.log(data);
     } else if (e.target.value === "Last Year") {
       setOption(e.target.value)
       const data = await fromRange({ email, duration: 365 });
       setData(data);
-      console.log(data);
+      // console.log(data);
     } else if(e.target.value === "By Date"){
       setOption("By Date")
     } else if(e.target.value === "By Date & Tag"){

@@ -48,7 +48,7 @@ export default function Udhari() {
       }
     });
     setNameList(nameListData);
-    console.log(nameList);
+    // console.log(nameList);
 
     setUdhariData(udhariData1);
     // console.log(udhariData);
@@ -68,7 +68,7 @@ export default function Udhari() {
     })
     return amount
   }
-console.log(  typeof(udhariCalc("Ajad")));
+// console.log(  typeof(udhariCalc("Ajad")));
 
 
   return (

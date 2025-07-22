@@ -16,16 +16,26 @@ export default function DeleteTxn({txnToDelete, setDelMdl, delMdl}) {
   const handleConfirm = async()=> {
     try {
         setLoading(true)
-        deleteTxn({ _id: txnToDelete._id });
-        dispatch(deleteItemById(txnToDelete._id))
-        setDelMdl(false);
-        toast.success("Deleted succesfully!",{
-          theme: "colored",
-        })
-        setLoading(false)
+        const result = await deleteTxn({ _id: txnToDelete._id });
+        console.log(result);
+        if(result.status !== 200) {
+          toast.error("Error While Deleting!" ,{
+            theme: "colored",
+          })
+          setLoading(false)
+          setDelMdl(false);
+          return;
+        }else{
+          dispatch(deleteItemById(txnToDelete._id))
+          toast.success("Deleted succesfully!",{
+            theme: "colored",
+          })
+          setLoading(false)
+          setDelMdl(false);
+        }
     } catch (error) {
       console.error("Error in handleConfirm:", error);
-      toast.error("Error While Deleting!",{
+      toast.error(`Error while deleting! ${error?.message}`,{
         theme: "colored",
       })
       setLoading(false)

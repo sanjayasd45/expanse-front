@@ -20,7 +20,7 @@ function App() {
       const url = `${baseUrl}/user/getUser`;
       const { data } = await axios.get(url, { withCredentials: true, headers: {'Authorization': `Bearer ${token}`} });
       const value = JSON.parse(localStorage.getItem('userData'));
-      console.log(data.user);
+      // console.log(data.user);
       dispatch(setUser(value))
       
       // console.log("from frotend", data.user);

@@ -11,11 +11,11 @@ export default function Navbar() {
   const navigate = useNavigate()
   const path = useLocation()
   const user = useSelector(state => state.user);
-  console.log(user);
+  // console.log(user);
   const dispatch = useDispatch()
 
   const handleClick = () => {
-    console.log("path", path.pathname);
+    // console.log("path", path.pathname);
     
     if(path.pathname === "/dashboard"){
       navigate("/")

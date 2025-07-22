@@ -15,7 +15,7 @@ export const getRecentData = createAsyncThunk(
         body: opt,
       });
       const data = await response;
-      console.log(data.data);
+      // console.log(data.data);
       
       return data.data;
     } catch (err) {
@@ -34,7 +34,7 @@ const slice = createSlice({
   reducers: {
     deleteItemById: (state, action) => {
       const idToDelete = action.payload; // The _id of the item to delete
-      console.log(action.payload);
+      // console.log(action.payload);
       state.list.data = state.list.data.filter((item) => (
         item._id !== idToDelete
       ));

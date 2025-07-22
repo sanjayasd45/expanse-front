@@ -46,10 +46,10 @@ export default function SerchByTags() {
       tag,
       email: user.email,
     };
-    console.log(data);
+    // console.log(data);
     const data1 = await searchByTags(data)
     setTagsData(data1)
-    console.log("data1", data1); 
+    // console.log("data1", data1); 
     
   }; 
   return (

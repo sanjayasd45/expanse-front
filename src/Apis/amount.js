@@ -11,7 +11,7 @@ export const addAmount = async(formData) => {
             body : formData
         })
         const data = await responce
-        console.log(data.data.addition);
+        // console.log(data.data.addition);
         return data.data.addition
     }catch(err){
         console.log(err);

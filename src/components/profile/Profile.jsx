@@ -35,7 +35,7 @@ export default function Profile() {
       
       setShowForm(false)
       //  generating statement pdf 
-      generatePDF(result?.data, user?.name, user?.email, selectedDate)
+      generatePDF(result, user?.name, user?.email, selectedDate)
       toast.success("Downloading started", {
         theme : "colored"
       })

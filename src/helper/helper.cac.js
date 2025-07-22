@@ -101,15 +101,22 @@ export const generatePDF = ((transactions, name, email, selectedDate) => {
     // Table Headers
     const tableColumn = ["Date", "Note", "Tag", "Name", "Amount (INR)", "Balance (INR)"];
 
-    // Table Rows
-    const tableRows = transactions.map((txn) => [
-        formatDate(txn.createdAt), // Format date
-        txn.note || "N/A", // Note
-        txn.Tag || "N/A", // Tag
-        txn.name || "N/A", // Name
-        `${txn.amount}`, // Format amount,
-        txn.runningBalance || 0, // Running balance
-    ]);
+    let initialBalance = transactions.initialBalance
+    console.log("Transactions:", transactions[0]);
+
+    const tableRows = transactions?.txnData.map((txn) => {
+        const signedAmount = txn.deduction ? -txn.amount : txn.amount;
+        initialBalance += signedAmount;
+        return [
+            formatDate(txn.createdAt),      // Format date
+            txn.note || "N/A",              // Note
+            txn.Tag || "N/A",               // Tag
+            txn.name || "N/A",              // Name
+            `${txn.amount}`,                // Format amount
+            initialBalance                  // Calculated running balance
+        ];
+    });
+
 
     // Add table with autoTable
     doc.autoTable({
@@ -129,7 +136,7 @@ export const generatePDF = ((transactions, name, email, selectedDate) => {
 
 export const setFileToServer = async (file) => {
     // if(!file[0]) return null;
-     const rawData = await file?.arrayBuffer();
+    const rawData = await file?.arrayBuffer();
     try {
         const response = await axios.post(
             `${baseUrl}/helpers/cloudinary-signature`,
@@ -142,7 +149,7 @@ export const setFileToServer = async (file) => {
         );
 
         const result = response.data;
-        console.log('Uploaded URL:', result.url);
+        // console.log('Uploaded URL:', result.url);
         return result.url; // ✅ Return the image URL
     } catch (err) {
         console.error('Upload failed:', err);
@@ -150,19 +157,19 @@ export const setFileToServer = async (file) => {
 }
 export function getCloudinaryPublicId(url) {
     if (!url) return null;
-  try {
-    const parts = new URL(url).pathname.split('/');
-    
-    // Remove everything before `upload/`
-    const uploadIndex = parts.indexOf('upload');
-    if (uploadIndex === -1) return null;
+    try {
+        const parts = new URL(url).pathname.split('/');
 
-    const publicIdWithExt = parts.slice(uploadIndex + 1).join('/');
-    const publicId = publicIdWithExt.replace(/\.[^/.]+$/, ''); // remove file extension
+        // Remove everything before `upload/`
+        const uploadIndex = parts.indexOf('upload');
+        if (uploadIndex === -1) return null;
 
-    return publicId;
-  } catch (err) {
-    console.error('Invalid Cloudinary URL:', err);
-    return null;
-  }
+        const publicIdWithExt = parts.slice(uploadIndex + 1).join('/');
+        const publicId = publicIdWithExt.replace(/\.[^/.]+$/, ''); // remove file extension
+
+        return publicId;
+    } catch (err) {
+        console.error('Invalid Cloudinary URL:', err);
+        return null;
+    }
 }

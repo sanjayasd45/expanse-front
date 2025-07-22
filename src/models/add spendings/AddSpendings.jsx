@@ -70,7 +70,7 @@ export default function AddSpendings({ setIsSpending }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loading when form submission starts.
-    console.log("data", data);
+    // console.log("data", data);
 
     try {
       // Validation checks
@@ -97,13 +97,13 @@ export default function AddSpendings({ setIsSpending }) {
         setLoading(false);
         return;
       }
-      console.log("file", file);
+      // console.log("file", file);
       const fileUrl = await setFileToServer(file); // make sure this handles the upload correctly
       setFileUrl(fileUrl);
       const fileId = getCloudinaryPublicId(fileUrl); // parse the Cloudinary public ID
       setFileId(fileId);
 
-      console.log("fileUrl", fileUrl);
+      // console.log("fileUrl", fileUrl);
       const amountf = evaluateExpression(data.amount);
       const dataToAdd = await AddSpending({
         name: name,
@@ -114,7 +114,7 @@ export default function AddSpendings({ setIsSpending }) {
         deduction: true,
         fileId,
       });
-      console.log("dataToAdd ", dataToAdd);
+      // console.log("dataToAdd ", dataToAdd);
 
       setData({
         amount: "",
@@ -141,9 +141,9 @@ export default function AddSpendings({ setIsSpending }) {
     const foo = async () => {
       const lendNames1 = await optNames(data);
       setLendNames(lendNames1);
-      console.log("lendNames1", lendNames1);
+      // console.log("lendNames1", lendNames1);
     };
-    console.log(data);
+    // console.log(data);
     foo();
   }, []);
   const handleNameChange = (e) => {

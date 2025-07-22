@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
 export const alltimeData = async({email}) => {
-    console.log(email);
+    // console.log(email);
     let totalSum = 0
     let balance = 0 
 
@@ -17,21 +17,21 @@ export const alltimeData = async({email}) => {
             body : email
         })
         const data = await responce.data
-        console.log(data);
+        // console.log(data);
         
         data?.map((e) => {
             totalSum = totalSum + e.sum
             if(e.deduction){
                 balance = balance - e.sum
-                console.log("from true");
+                // console.log("from true");
                 
             }else{
                 console.log(e);
                 balance = balance + e.sum
-                console.log("from false");
+                // console.log("from false");
             }
         })
-        console.log(data.data);
+        // console.log(data.data);
 
         
         return {data, totalSum, balance}
@@ -40,7 +40,7 @@ export const alltimeData = async({email}) => {
     }
 }
 export const today = async({email}) => {
-    console.log(email);
+    // console.log(email);
     let totalSum = 0
     try{
         const responce = await axios.post(`${baseUrl}/filter/today` , {
@@ -54,7 +54,7 @@ export const today = async({email}) => {
         data?.map((e) => {
             totalSum = totalSum + e.sum
         })
-        console.log(data.data);
+        // console.log(data.data);
         return {data, totalSum}
     }catch(err){
         console.log(err);
@@ -75,7 +75,7 @@ export const fromRange = async(data) => {
         data?.map((e) => {
             totalSum = totalSum + e.sum
         })
-        console.log(data.data);
+        // console.log(data.data);
         return {data, totalSum}
     }catch(err){
         console.log(err);
@@ -91,7 +91,7 @@ export const dateByRange = async(data) => {
             body : data
         })
         const data1 = await responce.data
-        console.log(data1);
+        // console.log(data1);
         
         return data1
     }catch(err){
@@ -108,7 +108,7 @@ export const serachUdhari = async(data) => {
             body : data
         })
         const data1 = await responce.data
-        console.log(data1);
+        // console.log(data1);
         
         return data1
     }catch(err){
@@ -125,7 +125,7 @@ export const searchByTags = async(data) => {
             body : data
         })
         const data1 = await responce.data
-        console.log(data1);
+        // console.log(data1);
         
         return data1
     }catch(err){
@@ -143,7 +143,7 @@ export const optNames = async(data) => {
             body : data
         })
         const data1 = await responce.data
-        console.log(data1);
+        // console.log(data1);
         return data1
     }catch(err){
         console.log(err);

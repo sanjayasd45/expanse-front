@@ -36,14 +36,14 @@ export default function Home() {
   }
 
   const recentDataList= recentData?.data;
-  console.log("recentDataList", recentDataList);
+  // console.log("recentDataList", recentDataList);
   
 
   useEffect(() => {
     
     if (email !== "") {
       const cPage = Math.ceil(recentData?.totalDocs / limit);
-      console.log("resq", cPage);
+      // console.log("resq", cPage);
       if (page > cPage) {
         setPage(cPage);
         dispatch(getRecentData({ email, page : cPage, limit }));
@@ -57,9 +57,9 @@ export default function Home() {
     navigate("/auth")
   }
   const txnToDeleted = (item) => {
-    console.log(item);
+    // console.log(item);
     setDelMdl(true)   
-    console.log(delMdl);
+    // console.log(delMdl);
      
     setTxnToDelete(item)
   }

@@ -23,12 +23,12 @@ export default function AddAmount({ setIsOpenAmt }) {
   const [note, setNote] = useState("");
 
   const handleSelect = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setOpt(e.target.value);
   };
   const handleChange = (e) => {
     if (!isNaN(e.target.value) && e.target.value !== " ") {
-      console.log(e.target.value / 1);
+      // console.log(e.target.value / 1);
       setAmt(e.target.value);
     } else if (e.target.value / 1 === 0) {
       setAmt("");
@@ -74,7 +74,7 @@ export default function AddAmount({ setIsOpenAmt }) {
     } else {
       try {
         const data = await addAmount(formData);
-        console.log(formData);
+        // console.log(formData);
         dispatch(addItem(data));
         setIsOpenAmt(false);
         setAmt("");

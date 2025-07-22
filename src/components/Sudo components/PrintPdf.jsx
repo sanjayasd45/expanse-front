@@ -3,7 +3,7 @@ import {autoTable} from "jspdf-autotable";
 import { useSelector } from "react-redux";
 
 const TransactionPDF = ({ transactions }) => {
-  console.log("transactions", transactions);
+  // console.log("transactions", transactions);
 
   const user = useSelector((state) => state.user);
   const handlePrintPDF = () => {
@@ -41,14 +41,14 @@ const TransactionPDF = ({ transactions }) => {
     // Add table with autoTable
     autoTable(doc,{
       didParseCell: function (data) {
-        console.log(
-          "didParseCell called for cell:",
-          data.cell.text,
-          "at row:",
-          data.row.index,
-          "col:",
-          data.column.index
-        );
+        // console.log(
+        //   "didParseCell called for cell:",
+        //   data.cell.text,
+        //   "at row:",
+        //   data.row.index,
+        //   "col:",
+        //   data.column.index
+        // );
       },
       startY: y,
       head: [tableColumn],
